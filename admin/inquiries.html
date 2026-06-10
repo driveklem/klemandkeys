@@ -1,175 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inquiries | Klem & Keys Admin</title>
-
-    <!-- Dependencies -->
+    <title>Inquiries | Klem &amp; Keys Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Premium Admin CSS -->
     <link rel="stylesheet" href="../assets/css/admin/dashboard.css">
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17887589364"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'AW-17887589364');
-    </script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-17887589364');</script>
 </head>
-
 <body>
+<div class="wrapper">
 
-    <div class="wrapper">
-        <!-- Sidebar -->
-        <nav class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <a href="dashboard.html" class="brand-wrapper">
-                    <img src="../assets/img/logo-1.png" alt="Logo" class="brand-logo">
+    <!-- ===== SIDEBAR ===== -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="brand-wrapper">
+                <img src="../assets/img/logo-1.png" alt="Klem &amp; Keys" class="brand-logo">
+            </a>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="menu-label">Main Menu</li>
+            <li class="menu-item"><a href="dashboard.html" class="menu-link"><i class="fas fa-th-large"></i><span>Dashboard</span></a></li>
+            <li class="menu-item"><a href="properties.html" class="menu-link"><i class="fas fa-building"></i><span>Properties</span></a></li>
+            <li class="menu-item"><a href="property-add.html" class="menu-link"><i class="fas fa-plus-circle"></i><span>Add Property</span></a></li>
+            <li class="menu-item">
+                <a href="inquiries.html" class="menu-link active">
+                    <i class="fas fa-envelope-open-text"></i><span>Inquiries</span>
+                    <span class="badge-dot" id="unreadInquiriesBadge" style="display:none;">0</span>
                 </a>
+            </li>
+            <div class="sidebar-divider"></div>
+            <li class="menu-label">Settings</li>
+            <li class="menu-item"><a href="configuration.html" class="menu-link"><i class="fas fa-cog"></i><span>Configuration</span></a></li>
+            <li class="menu-item"><a href="../index.html" class="menu-link"><i class="fas fa-external-link-alt"></i><span>Back to Website</span></a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="avatar">A</div>
+                <div class="user-details"><h4>Admin User</h4><span>Super Admin</span></div>
+            </div>
+            <button id="logoutBtn" class="btn-logout-ghost"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+        <header class="topbar">
+            <div class="d-flex align-items-center">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar"><i class="fas fa-bars"></i></button>
+                <div class="page-path">Admin / <strong>Inquiries</strong></div>
+            </div>
+            <div class="topbar-right">
+                <button class="topbar-btn" id="markAllReadBtn" title="Mark all as read"><i class="fas fa-check-double"></i></button>
+            </div>
+        </header>
+
+        <div class="content-area">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Client Inquiries</h1>
+                    <p class="page-subtitle">Manage and respond to client messages about your properties.</p>
+                </div>
             </div>
 
-            <ul class="sidebar-menu">
-                <li class="menu-label">Main Menu</li>
-                <li class="menu-item">
-                    <a href="dashboard.html" class="menu-link">
-                        <i class="fas fa-th-large"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="properties.html" class="menu-link">
-                        <i class="fas fa-building"></i>
-                        <span>Properties</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="property-add.html" class="menu-link">
-                        <i class="fas fa-plus-circle"></i>
-                        <span>Add Property</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="inquiries.html" class="menu-link active">
-                        <i class="fas fa-envelope-open-text"></i>
-                        <span>Inquiries</span>
-                        <span class="badge bg-danger ms-auto" id="unreadInquiriesBadge" style="display: none;">0</span>
-                    </a>
-                </li>
-
-                <li class="menu-label">Settings</li>
-                <li class="menu-item">
-                    <a href="configuration.html" class="menu-link">
-                        <i class="fas fa-cog"></i>
-                        <span>Configuration</span>
-                    </a>
-                </li>
-                <li class="menu-item mt-4">
-                    <a href="../index.html" class="menu-link">
-                        <i class="fas fa-external-link-alt"></i>
-                        <span>Back to Website</span>
-                    </a>
-                </li>
-            </ul>
-
-            <div class="sidebar-footer">
-                <div class="user-profile">
-                    <div class="avatar">A</div>
-                    <div class="user-details">
-                        <h4>Admin User</h4>
-                        <span>Super Admin</span>
+            <!-- Stats -->
+            <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-bottom: 24px;">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <div class="stat-label">Total Messages</div>
+                        <div class="stat-value" id="totalInquiries">--</div>
+                    </div>
+                    <div class="stat-icon-wrapper stat-icon-blue">
+                        <i class="fas fa-inbox"></i>
                     </div>
                 </div>
-                <button id="logoutBtn" class="btn-logout-ghost">
-                    <i class="fas fa-sign-out-alt"></i> Sign Out
-                </button>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <div class="stat-label">Unread</div>
+                        <div class="stat-value" id="unreadCount">--</div>
+                    </div>
+                    <div class="stat-icon-wrapper stat-icon-gold">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <div class="stat-label">This Week</div>
+                        <div class="stat-value" id="weekCount">--</div>
+                    </div>
+                    <div class="stat-icon-wrapper stat-icon-green">
+                        <i class="fas fa-calendar-week"></i>
+                    </div>
+                </div>
             </div>
-        </nav>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <header class="topbar">
-                <div class="d-flex align-items-center">
-                    <button class="sidebar-toggle" id="sidebarToggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <div class="page-path">
-                        Pages / <strong>Inquiries</strong>
-                    </div>
-                </div>
-            </header>
-
-            <div class="content-area">
-                <h1 class="welcome-title mb-4">Client Inquiries</h1>
-
-                <!-- Inquiry Stats -->
-                <div class="row g-4 mb-4">
-                    <div class="col-md-4">
-                        <div class="stat-card py-3">
-                            <div>
-                                <div class="stat-value text-primary">0</div>
-                                <div class="stat-label">Total Messages</div>
-                            </div>
+            <!-- Search / Filter -->
+            <div class="filters-section" id="filtersSection">
+                <div class="filter-row">
+                    <div>
+                        <label class="form-label">Search</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            <input type="text" id="searchInput" class="form-control" placeholder="Search by name, property...">
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="stat-card py-3">
-                            <div>
-                                <div class="stat-value text-warning">0</div>
-                                <div class="stat-label">Unread</div>
-                            </div>
-                        </div>
+                    <div>
+                        <label class="form-label">Status</label>
+                        <select id="statusFilter" class="form-select">
+                            <option value="">All</option>
+                            <option value="unread">Unread</option>
+                            <option value="read">Read</option>
+                        </select>
                     </div>
-                </div>
-
-                <!-- Inquiries List -->
-                <div class="card-table">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Client Info</th>
-                                    <th>Property</th>
-                                    <th>Message</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Dynamic content loaded here -->
-                                <tr>
-                                    <td colspan="6" class="text-center py-5">
-                                        <div class="spinner-border text-primary" role="status"></div>
-                                        <p class="mt-2">Loading inquiries...</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div>
+                        <label class="form-label">Sort By</label>
+                        <select id="sortFilter" class="form-select">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                        </select>
                     </div>
                 </div>
             </div>
-        </main>
 
-        <!-- Mobile Sidebar Overlay -->
-        <div class="sidebar-overlay" id="sidebarOverlay"></div>
-    </div>
+            <!-- Inquiries Table -->
+            <div class="card-table">
+                <div class="card-header">
+                    <h5 class="card-title"><i class="fas fa-envelope-open-text" style="color:var(--gold);margin-right:8px;"></i>All Inquiries</h5>
+                    <button class="btn-filter-toggle" id="filterToggle" title="Filter"><i class="fas fa-filter"></i></button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Client Info</th>
+                                <th>Property</th>
+                                <th>Message</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inquiriesTableBody">
+                            <tr class="loading-row">
+                                <td colspan="6">
+                                    <div class="spinner-border spinner-border-sm" role="status"></div>
+                                    <span style="margin-left:10px;">Loading inquiries...</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        </div>
+    </main>
 
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../assets/js/supabase.js"></script>
-    <script src="../assets/js/admin/auth-guard.js"></script>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+</div>
 
-    <script src="../assets/js/admin/dashboard.js"></script>
-    <script src="../assets/js/admin/inquiries.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../assets/js/supabase.js"></script>
+<script src="../assets/js/admin/auth-guard.js"></script>
+<script src="../assets/js/admin/dashboard.js"></script>
+<script src="../assets/js/admin/inquiries.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const filterToggle = document.getElementById('filterToggle');
+    const filtersSection = document.getElementById('filtersSection');
+    if (filterToggle && filtersSection) {
+        filterToggle.addEventListener('click', () => filtersSection.classList.toggle('show'));
+    }
+});
+</script>
 </body>
-
 </html>

@@ -1,717 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Properties | Klem & Keys Admin</title>
-
-    <!-- Dependencies -->
+    <title>Manage Properties | Klem &amp; Keys Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Premium Admin CSS -->
     <link rel="stylesheet" href="../assets/css/admin/dashboard.css">
-
-    <style>
-        /* Enhanced Filters */
-        .filters-section {
-            background: #fff;
-            padding: 24px;
-            border-radius: 16px;
-            margin-bottom: 24px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .filter-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-
-        .btn-primary-gold {
-            background: linear-gradient(135deg, #b8923b 0%, #d4b15c 100%);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(184, 146, 59, 0.3);
-            text-decoration: none;
-        }
-
-        .btn-primary-gold:hover {
-            background: linear-gradient(135deg, #d4b15c 0%, #b8923b 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(184, 146, 59, 0.4);
-            color: white;
-        }
-
-        .btn-clear-filters {
-            background: #f3f4f6;
-            color: #6b7280;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .btn-clear-filters:hover {
-            background: #e5e7eb;
-            color: #374151;
-        }
-
-        /* Bulk Actions */
-        .bulk-actions {
-            display: none;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 20px;
-            background: #eff6ff;
-            border-radius: 8px;
-            margin-bottom: 16px;
-        }
-
-        .bulk-actions.show {
-            display: flex;
-        }
-
-        /* View Toggle */
-        .view-toggle {
-            display: flex;
-            gap: 8px;
-            background: #f3f4f6;
-            padding: 4px;
-            border-radius: 8px;
-        }
-
-        .view-toggle button {
-            padding: 8px 16px;
-            border: none;
-            background: transparent;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: #6b7280;
-        }
-
-        .view-toggle button.active {
-            background: white;
-            color: #0b2d4d;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Pagination */
-        .pagination-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 24px;
-            border-top: 1px solid #f1f5f9;
-        }
-
-        .pagination {
-            display: flex;
-            gap: 8px;
-            margin: 0;
-        }
-
-        .pagination button {
-            padding: 8px 12px;
-            border: 1px solid #e5e7eb;
-            background: white;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: #374151;
-            font-weight: 500;
-        }
-
-        .pagination button:hover:not(:disabled) {
-            background: #f9fafb;
-            border-color: #b8923b;
-        }
-
-        .pagination button.active {
-            background: #0b2d4d;
-            color: white;
-            border-color: #0b2d4d;
-        }
-
-        .pagination button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Results Info */
-        .results-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            padding: 0 4px;
-        }
-
-        .results-count {
-            color: #6b7280;
-            font-size: 0.9rem;
-        }
-
-        .results-count strong {
-            color: #0b2d4d;
-        }
-
-        /* Price Styling */
-        .text-price {
-            color: #b8923b;
-            font-weight: 700;
-            font-size: 1rem;
-        }
-
-        /* Table Image */
-        .table-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 12px;
-            border: 2px solid #e5e7eb;
-        }
-
-        .prop-name-cell {
-            display: flex;
-            align-items: center;
-        }
-
-        /* Enhanced Grid View */
-        .properties-grid {
-            display: none;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 24px;
-            padding: 10px 0;
-        }
-
-        .properties-grid.active {
-            display: grid;
-        }
-
-        .property-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        }
-
-        .property-card:hover {
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-            transform: translateY(-4px);
-        }
-
-        .property-card-image {
-            height: 200px;
-            background-color: #f3f4f6;
-            background-image: url('../assets/img/hero-bg.jpg');
-            /* Fallback/Placeholder */
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        .card-price-badge {
-            position: absolute;
-            bottom: 12px;
-            right: 12px;
-            background: rgba(11, 45, 77, 0.9);
-            color: #d4b15c;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            backdrop-filter: blur(4px);
-        }
-
-        .card-status-badge {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-        }
-
-        .property-card-body {
-            padding: 20px;
-        }
-
-        .property-card-title {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-
-        .property-meta {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-            font-size: 0.85rem;
-            color: #6b7280;
-        }
-
-        .property-meta span {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* Theme Utilities */
-        .text-gold {
-            color: #b8923b !important;
-        }
-
-        .text-theme-dark {
-            color: #0b2d4d !important;
-        }
-
-        .btn-outline-gold {
-            color: #b8923b;
-            border-color: #b8923b;
-        }
-
-        .btn-outline-gold:hover {
-            background-color: #b8923b;
-            color: white;
-        }
-
-        @media (max-width: 992px) {
-            .filter-row {
-                grid-template-columns: 1fr;
-            }
-
-            .results-info {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
-
-            .pagination-wrapper {
-                flex-direction: column;
-                gap: 16px;
-            }
-
-            /* Mobile Filter Toggle */
-            .btn-filter-toggle {
-                display: block !important;
-            }
-
-            .filters-section {
-                display: none;
-            }
-
-            .filters-section.show {
-                display: block;
-                animation: slideDown 0.3s ease-out;
-            }
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Filter Toggle Button */
-        .btn-filter-toggle {
-            display: none !important;
-            /* Hidden on desktop by default */
-            width: 48px;
-            height: 48px;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #b8923b 0%, #d4b15c 100%);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            box-shadow: 0 4px 12px rgba(184, 146, 59, 0.25);
-            transition: all 0.3s;
-            cursor: pointer;
-            font-size: 1.2rem;
-            z-index: 10;
-        }
-
-        .btn-filter-toggle:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(184, 146, 59, 0.4);
-            color: white;
-        }
-
-        .btn-filter-toggle.active {
-            background: #0b2d4d;
-            /* Dark blue when active */
-            box-shadow: 0 4px 12px rgba(11, 45, 77, 0.3);
-            color: white;
-        }
-
-        /* List View Action Buttons */
-        .action-buttons-cell {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .btn-icon-view {
-            color: #0b2d4d;
-            background-color: rgba(26, 74, 122, 0.08);
-            /* Light blue tint */
-            border: none;
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .btn-icon-view:hover {
-            background-color: #0b2d4d;
-            color: white;
-        }
-
-        .btn-icon {
-            border: none;
-            background: transparent;
-            width: 32px;
-            height: 32px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 6px;
-            transition: all 0.2s;
-            color: #6b7280;
-        }
-
-        .btn-icon:hover {
-            background-color: #f3f4f6;
-            color: #b8923b;
-        }
-
-        /* Grid View Button */
-        .btn-outline-darkblue {
-            color: #0b2d4d;
-            border-color: #0b2d4d;
-        }
-
-        .btn-outline-darkblue:hover {
-            background-color: #0b2d4d;
-            color: white;
-        }
-
-        @media (max-width: 992px) {
-            /* ... previous styles ... */
-
-            .btn-filter-toggle {
-                display: flex !important;
-                /* using flex to center icon */
-            }
-        }
-    </style>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17887589364"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'AW-17887589364');
-    </script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-17887589364');</script>
 </head>
-
 <body>
+<div class="wrapper">
 
-    <div class="wrapper">
-        <!-- Sidebar -->
-        <nav class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <a href="dashboard.html" class="brand-wrapper">
-                    <img src="../assets/img/logo-1.png" alt="Logo" class="brand-logo">
+    <!-- ===== SIDEBAR ===== -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="brand-wrapper">
+                <img src="../assets/img/logo-1.png" alt="Klem &amp; Keys" class="brand-logo">
+            </a>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="menu-label">Main Menu</li>
+            <li class="menu-item"><a href="dashboard.html" class="menu-link"><i class="fas fa-th-large"></i><span>Dashboard</span></a></li>
+            <li class="menu-item"><a href="properties.html" class="menu-link active"><i class="fas fa-building"></i><span>Properties</span></a></li>
+            <li class="menu-item"><a href="property-add.html" class="menu-link"><i class="fas fa-plus-circle"></i><span>Add Property</span></a></li>
+            <li class="menu-item">
+                <a href="inquiries.html" class="menu-link">
+                    <i class="fas fa-envelope-open-text"></i><span>Inquiries</span>
+                    <span class="badge-dot" id="unreadInquiriesBadge" style="display:none;">0</span>
+                </a>
+            </li>
+            <div class="sidebar-divider"></div>
+            <li class="menu-label">Settings</li>
+            <li class="menu-item"><a href="configuration.html" class="menu-link"><i class="fas fa-cog"></i><span>Configuration</span></a></li>
+            <li class="menu-item"><a href="../index.html" class="menu-link"><i class="fas fa-external-link-alt"></i><span>Back to Website</span></a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="avatar">A</div>
+                <div class="user-details"><h4>Admin User</h4><span>Super Admin</span></div>
+            </div>
+            <button id="logoutBtn" class="btn-logout-ghost"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+        </div>
+    </nav>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+        <header class="topbar">
+            <div class="d-flex align-items-center">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar"><i class="fas fa-bars"></i></button>
+                <div class="page-path">Admin / <strong>Properties</strong></div>
+            </div>
+            <div class="topbar-right">
+                <button class="btn-filter-toggle topbar-btn" id="filterToggle" title="Toggle Filters"><i class="fas fa-filter"></i></button>
+                <a href="property-add.html" class="btn-gold" style="padding:8px 16px;font-size:0.82rem;">
+                    <i class="fas fa-plus"></i> Add Property
                 </a>
             </div>
+        </header>
 
-            <ul class="sidebar-menu">
-                <li class="menu-label">Main Menu</li>
-                <li class="menu-item">
-                    <a href="dashboard.html" class="menu-link">
-                        <i class="fas fa-th-large"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="properties.html" class="menu-link active">
-                        <i class="fas fa-building"></i>
-                        <span>Properties</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="property-add.html" class="menu-link">
-                        <i class="fas fa-plus-circle"></i>
-                        <span>Add Property</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="inquiries.html" class="menu-link">
-                        <i class="fas fa-envelope-open-text"></i>
-                        <span>Inquiries</span>
-                        <span class="badge bg-danger ms-auto" id="unreadInquiriesBadge" style="display: none;">0</span>
-                    </a>
-                </li>
+        <div class="content-area">
 
-                <li class="menu-label">Settings</li>
-                <li class="menu-item">
-                    <a href="configuration.html" class="menu-link">
-                        <i class="fas fa-cog"></i>
-                        <span>Configuration</span>
-                    </a>
-                </li>
-                <li class="menu-item mt-4">
-                    <a href="../index.html" class="menu-link">
-                        <i class="fas fa-external-link-alt"></i>
-                        <span>Back to Website</span>
-                    </a>
-                </li>
-            </ul>
-
-            <div class="sidebar-footer">
-                <div class="user-profile">
-                    <div class="avatar">A</div>
-                    <div class="user-details">
-                        <h4>Admin User</h4>
-                        <span>Super Admin</span>
-                    </div>
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Property Listings</h1>
+                    <p class="page-subtitle">Manage, edit, or remove your property listings.</p>
                 </div>
-                <button id="logoutBtn" class="btn-logout-ghost">
-                    <i class="fas fa-sign-out-alt"></i> Sign Out
-                </button>
+                <div class="page-actions d-none d-md-flex">
+                    <button class="btn-outline" id="exportBtn"><i class="fas fa-download"></i> Export</button>
+                    <a href="property-add.html" class="btn-gold"><i class="fas fa-plus"></i> Add Property</a>
+                </div>
             </div>
-        </nav>
 
-        <!-- Sidebar Overlay -->
-        <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <header class="topbar">
-                <div class="d-flex align-items-center">
-                    <button class="sidebar-toggle" id="sidebarToggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <div class="page-path">
-                        Pages / <strong>Properties</strong>
-                    </div>
-                </div>
-            </header>
-
-            <div class="content-area">
-                <!-- Header -->
-                <div class="d-flex justify-content-between align-items-center mb-4 flex-row"
-                    style="flex-direction: row !important; align-items: center !important;">
+            <!-- Filters -->
+            <div class="filters-section" id="filtersSection">
+                <div class="filter-row">
                     <div>
-                        <h1 class="welcome-title">Property Listings</h1>
-                        <p class="welcome-subtitle">Manage, edit, or remove your property listings.</p>
-                    </div>
-                    <div class="d-flex gap-2">
-                        <button class="btn-filter-toggle" id="filterToggle" title="Toggle Filters">
-                            <i class="fas fa-filter"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Advanced Filters -->
-                <div class="filters-section" id="filtersSection">
-                    <div class="filter-row">
-                        <div>
-                            <label class="form-label small text-muted mb-1">Search</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-white border-end-0">
-                                    <i class="fas fa-search text-muted"></i>
-                                </span>
-                                <input type="text" id="searchInput" class="form-control border-start-0 ps-0"
-                                    placeholder="Search by name, ID, location...">
-                            </div>
+                        <label class="form-label">Search</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            <input type="text" id="searchInput" class="form-control" placeholder="Search by name, ID, location...">
                         </div>
-
-                        <div>
-                            <label class="form-label small text-muted mb-1">Status</label>
-                            <select id="statusFilter" class="form-select">
-                                <option value="">All Statuses</option>
-                                <option value="active">Active</option>
-                                <option value="pending">Pending</option>
-                                <option value="sold">Sold</option>
-                                <option value="rented">Rented</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="form-label small text-muted mb-1">Property Type</label>
-                            <select id="typeFilter" class="form-select">
-                                <option value="">All Types</option>
-                                <option value="residential">Residential</option>
-                                <option value="commercial">Commercial</option>
-                                <option value="land">Land</option>
-                                <option value="industrial">Industrial</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="form-label small text-muted mb-1">Location</label>
-                            <select id="locationFilter" class="form-select">
-                                <option value="">All Locations</option>
-                                <option value="asokoro">Asokoro</option>
-                                <option value="maitama">Maitama</option>
-                                <option value="wuse">Wuse</option>
-                                <option value="gwarinpa">Gwarinpa</option>
-                                <option value="garki">Garki</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-center">
-                        <button class="btn-clear-filters" id="clearFilters">
-                            <i class="fas fa-times-circle me-2"></i>Clear Filters
-                        </button>
-                        <div class="d-flex gap-2 align-items-center">
-                            <button class="btn btn-sm btn-outline-secondary" id="exportBtn">
-                                <i class="fas fa-download me-2"></i>Export
-                            </button>
-                            <div class="view-toggle">
-                                <button class="active" data-view="table">
-                                    <i class="fas fa-list"></i>
-                                </button>
-                                <button data-view="grid">
-                                    <i class="fas fa-th"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Bulk Actions -->
-                <div class="bulk-actions" id="bulkActions">
-                    <input type="checkbox" id="selectAll" class="form-check-input">
-                    <span class="text-muted"><span id="selectedCount">0</span> selected</span>
-                    <button class="btn btn-sm btn-outline-danger">
-                        <i class="fas fa-trash me-1"></i>Delete Selected
-                    </button>
-                    <button class="btn btn-sm btn-outline-primary">
-                        <i class="fas fa-edit me-1"></i>Bulk Edit
-                    </button>
-                </div>
-
-                <!-- Results Info -->
-                <div class="results-info">
-                    <div class="results-count">
-                        Showing <strong>1-10</strong> of <strong>45</strong> properties
                     </div>
                     <div>
-                        <select class="form-select form-select-sm" style="width: auto;" id="itemsPerPage">
-                            <option value="10">10 per page</option>
-                            <option value="25">25 per page</option>
-                            <option value="50">50 per page</option>
-                            <option value="100">100 per page</option>
+                        <label class="form-label">Status</label>
+                        <select id="statusFilter" class="form-select">
+                            <option value="">All Statuses</option>
+                            <option value="active">Active</option>
+                            <option value="pending">Pending</option>
+                            <option value="sold">Sold</option>
+                            <option value="rented">Rented</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Type</label>
+                        <select id="typeFilter" class="form-select">
+                            <option value="">All Types</option>
+                            <option value="residential">Residential</option>
+                            <option value="commercial">Commercial</option>
+                            <option value="land">Land</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Location</label>
+                        <select id="locationFilter" class="form-select">
+                            <option value="">All Locations</option>
+                            <option value="asokoro">Asokoro</option>
+                            <option value="maitama">Maitama</option>
+                            <option value="wuse">Wuse</option>
+                            <option value="gwarinpa">Gwarinpa</option>
+                            <option value="karsana">Karsana</option>
                         </select>
                     </div>
                 </div>
-
-                <!-- Properties Table -->
-                <div class="card-table" id="tableView">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 40px;">
-                                        <input type="checkbox" class="form-check-input">
-                                    </th>
-                                    <th>Ref ID</th>
-                                    <th>Property Name</th>
-                                    <th>Location</th>
-                                    <th>Price</th>
-                                    <th>Type</th>
-                                    <th>Status</th>
-                                    <th>Date Added</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="propertiesTableBody">
-                                <!-- Dynamic data loaded via JS -->
-                            </tbody>
-                        </table>
+                <div class="d-flex justify-content-between align-items-center mt-3 flex-wrap gap-2">
+                    <button class="btn-ghost" id="clearFilters"><i class="fas fa-times me-2"></i>Clear Filters</button>
+                    <div class="d-flex align-items-center gap-2">
+                        <select class="form-select form-select-sm" style="width:auto;" id="itemsPerPage">
+                            <option value="10">10 per page</option>
+                            <option value="25">25 per page</option>
+                            <option value="50">50 per page</option>
+                        </select>
+                        <div class="view-toggle">
+                            <button class="active" data-view="table" title="Table View"><i class="fas fa-list"></i></button>
+                            <button data-view="grid" title="Grid View"><i class="fas fa-th"></i></button>
+                        </div>
                     </div>
-
-
-                </div>
-
-                <!-- Grid View (Hidden by default) -->
-                <!-- Grid View (Hidden by default) -->
-                <div class="properties-grid" id="gridView">
-                    <!-- Dynamic data loaded via JS -->
-                </div>
-
-                <!-- Pagination Controls -->
-                <div class="d-flex justify-content-center mt-4">
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination" id="paginationControls">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" id="prevPage" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <!-- Dynamic Pagination -->
-                            <li class="page-item">
-                                <a class="page-link" href="#" id="nextPage" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
-        </main>
 
-        <!-- Mobile Sidebar Overlay -->
-        <div class="sidebar-overlay" id="sidebarOverlay"></div>
-    </div>
+            <!-- Bulk Actions -->
+            <div class="bulk-actions" id="bulkActions">
+                <input type="checkbox" id="selectAll" class="form-check-input">
+                <span><span id="selectedCount">0</span> selected</span>
+                <button class="btn-danger-ghost"><i class="fas fa-trash me-1"></i>Delete</button>
+            </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../assets/js/supabase.js"></script>
-    <script src="../assets/js/admin/auth-guard.js"></script>
-    <script src="../assets/js/admin/dashboard.js"></script>
-    <script src="../assets/js/admin/properties.js"></script>
+            <!-- Results Info -->
+            <div class="results-info">
+                <div class="results-count" id="resultsInfo">Loading properties...</div>
+            </div>
 
-    <!-- ROBUST SIDEBAR TOGGLE FIX -->
+            <!-- Table View -->
+            <div class="card-table" id="tableView">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width:40px;"><input type="checkbox" class="form-check-input" id="selectAllHeader"></th>
+                                <th>Ref ID</th>
+                                <th>Property Name</th>
+                                <th>Location</th>
+                                <th>Price</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Date Added</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="propertiesTableBody">
+                            <tr class="loading-row">
+                                <td colspan="9">
+                                    <div class="spinner-border spinner-border-sm" role="status"></div>
+                                    <span style="margin-left:10px;">Loading properties...</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-    <!-- ROBUST SIDEBAR TOGGLE FIX -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Filter Toggle for Mobile
-            const filterToggle = document.getElementById('filterToggle');
-            const filtersSection = document.getElementById('filtersSection');
+            <!-- Grid View -->
+            <div class="properties-grid" id="gridView"></div>
 
-            if (filterToggle && filtersSection) {
-                filterToggle.addEventListener('click', function () {
-                    filtersSection.classList.toggle('show');
-                });
-            }
+            <!-- Pagination -->
+            <div class="d-flex justify-content-center mt-4">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination" id="paginationControls">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" id="prevPage" aria-label="Previous"><span>&laquo;</span></a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" id="nextPage" aria-label="Next"><span>&raquo;</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../assets/js/supabase.js"></script>
+<script src="../assets/js/admin/auth-guard.js"></script>
+<script src="../assets/js/admin/dashboard.js"></script>
+<script src="../assets/js/admin/properties.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const filterToggle = document.getElementById('filterToggle');
+    const filtersSection = document.getElementById('filtersSection');
+    if (filterToggle && filtersSection) {
+        filterToggle.addEventListener('click', () => filtersSection.classList.toggle('show'));
+    }
+    // View toggle
+    document.querySelectorAll('.view-toggle button').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const view = this.dataset.view;
+            document.getElementById('tableView').style.display = view === 'table' ? 'block' : 'none';
+            const grid = document.getElementById('gridView');
+            grid.style.display = view === 'grid' ? 'grid' : 'none';
+            if (view === 'grid') grid.classList.add('active');
+            else grid.classList.remove('active');
         });
-    </script>
+    });
+});
+</script>
 </body>
-
 </html>

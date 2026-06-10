@@ -1,392 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configuration | Klem & Keys Admin</title>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Bootstrap 5 -->
+    <title>Configuration | Klem &amp; Keys Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Admin CSS -->
     <link rel="stylesheet" href="../assets/css/admin/dashboard.css">
-
-    <style>
-        /* Custom Styles for Configuration Page */
-        .config-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            margin-bottom: 24px;
-        }
-
-        .config-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid #f3f4f6;
-            background: #fff;
-        }
-
-        .config-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #111827;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .config-body {
-            padding: 24px;
-        }
-
-        /* Tabs Styling */
-        .nav-tabs {
-            border-bottom: 1px solid #e5e7eb;
-            margin-bottom: 24px;
-            gap: 8px;
-        }
-
-        .nav-tabs .nav-link {
-            border: none;
-            color: #6b7280;
-            font-weight: 500;
-            padding: 12px 20px;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-
-        .nav-tabs .nav-link:hover {
-            color: #111827;
-            background: #f9fafb;
-        }
-
-        .nav-tabs .nav-link.active {
-            color: #b8923b;
-            background: rgba(184, 146, 59, 0.1);
-            font-weight: 600;
-        }
-
-        .nav-tabs .nav-link i {
-            margin-right: 8px;
-        }
-
-        /* List Items */
-        .list-group-item {
-            border: 1px solid #f3f4f6;
-            margin-bottom: 8px;
-            border-radius: 8px !important;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 16px;
-        }
-
-        .list-group-item:hover {
-            background-color: #f9fafb;
-        }
-
-        .btn-add {
-            background: #0b2d4d;
-            color: white;
-            border: none;
-        }
-
-        .btn-add:hover {
-            background: #092540;
-            color: white;
-        }
-
-        .form-label {
-            font-weight: 500;
-            color: #374151;
-            font-size: 0.9rem;
-        }
-
-        .text-gold {
-            color: #b8923b !important;
-        }
-
-        .bg-gold-subtle {
-            background-color: rgba(184, 146, 59, 0.1);
-        }
-
-        .btn-theme-dark {
-            background-color: #0b2d4d;
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-
-        .btn-theme-dark:hover {
-            background-color: #092540;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(11, 45, 77, 0.2);
-        }
-    </style>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17887589364"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'AW-17887589364');
-    </script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-17887589364');</script>
 </head>
-
 <body>
+<div class="wrapper">
 
-    <div class="wrapper">
-        <!-- Sidebar -->
-        <nav class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <a href="dashboard.html" class="brand-wrapper">
-                    <img src="../assets/img/logo-1.png" alt="Logo" class="brand-logo">
+    <!-- ===== SIDEBAR ===== -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="brand-wrapper">
+                <img src="../assets/img/logo-1.png" alt="Klem &amp; Keys" class="brand-logo">
+            </a>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="menu-label">Main Menu</li>
+            <li class="menu-item"><a href="dashboard.html" class="menu-link"><i class="fas fa-th-large"></i><span>Dashboard</span></a></li>
+            <li class="menu-item"><a href="properties.html" class="menu-link"><i class="fas fa-building"></i><span>Properties</span></a></li>
+            <li class="menu-item"><a href="property-add.html" class="menu-link"><i class="fas fa-plus-circle"></i><span>Add Property</span></a></li>
+            <li class="menu-item">
+                <a href="inquiries.html" class="menu-link">
+                    <i class="fas fa-envelope-open-text"></i><span>Inquiries</span>
+                    <span class="badge-dot" id="unreadInquiriesBadge" style="display:none;">0</span>
                 </a>
+            </li>
+            <div class="sidebar-divider"></div>
+            <li class="menu-label">Settings</li>
+            <li class="menu-item"><a href="configuration.html" class="menu-link active"><i class="fas fa-cog"></i><span>Configuration</span></a></li>
+            <li class="menu-item"><a href="../index.html" class="menu-link"><i class="fas fa-external-link-alt"></i><span>Back to Website</span></a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="avatar">A</div>
+                <div class="user-details"><h4>Admin User</h4><span>Super Admin</span></div>
+            </div>
+            <button id="logoutBtn" class="btn-logout-ghost"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+        </div>
+    </nav>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+        <header class="topbar">
+            <div class="d-flex align-items-center">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar"><i class="fas fa-bars"></i></button>
+                <div class="page-path">Admin / <strong>Configuration</strong></div>
+            </div>
+        </header>
+
+        <div class="content-area">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">System Configuration</h1>
+                    <p class="page-subtitle">Manage global settings, property options, and site information.</p>
+                </div>
             </div>
 
-            <ul class="sidebar-menu">
-                <li class="menu-label">Main Menu</li>
-                <li class="menu-item">
-                    <a href="dashboard.html" class="menu-link">
-                        <i class="fas fa-th-large"></i>
-                        <span>Dashboard</span>
-                    </a>
+            <!-- Tabs -->
+            <ul class="nav nav-tabs" id="configTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="property-tab" data-bs-toggle="tab" data-bs-target="#property" type="button" role="tab">
+                        <i class="fas fa-home"></i> Property Data
+                    </button>
                 </li>
-                <li class="menu-item">
-                    <a href="properties.html" class="menu-link">
-                        <i class="fas fa-building"></i>
-                        <span>Properties</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="property-add.html" class="menu-link">
-                        <i class="fas fa-plus-circle"></i>
-                        <span>Add Property</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="inquiries.html" class="menu-link">
-                        <i class="fas fa-envelope-open-text"></i>
-                        <span>Inquiries</span>
-                        <span class="badge bg-danger ms-auto" id="unreadInquiriesBadge" style="display: none;">0</span>
-                    </a>
-                </li>
-
-                <li class="menu-label">Settings</li>
-                <li class="menu-item">
-                    <a href="configuration.html" class="menu-link active">
-                        <i class="fas fa-cog"></i>
-                        <span>Configuration</span>
-                    </a>
-                </li>
-                <li class="menu-item mt-4">
-                    <a href="../index.html" class="menu-link">
-                        <i class="fas fa-external-link-alt"></i>
-                        <span>Back to Website</span>
-                    </a>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="site-tab" data-bs-toggle="tab" data-bs-target="#site" type="button" role="tab">
+                        <i class="fas fa-globe"></i> Site Information
+                    </button>
                 </li>
             </ul>
 
-            <div class="sidebar-footer">
-                <div class="user-profile">
-                    <div class="avatar">A</div>
-                    <div class="user-details">
-                        <h4>Admin User</h4>
-                        <span>Super Admin</span>
-                    </div>
-                </div>
-                <button id="logoutBtn" class="btn-logout-ghost">
-                    <i class="fas fa-sign-out-alt"></i> Sign Out
-                </button>
-            </div>
-        </nav>
+            <!-- Tab Content -->
+            <div class="tab-content" id="configTabsContent">
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <header class="topbar">
-                <div class="d-flex align-items-center">
-                    <button class="sidebar-toggle" id="sidebarToggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <div class="page-path">
-                        Pages / <strong>Configuration</strong>
-                    </div>
-                </div>
-            </header>
-
-            <div class="content-area">
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <h1 class="welcome-title">System Configuration</h1>
-                        <p class="welcome-subtitle">Manage global settings, property options, and notifications.</p>
-                    </div>
-                </div>
-
-                <!-- Main Tabs -->
-                <ul class="nav nav-tabs" id="configTabs" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="property-tab" data-bs-toggle="tab"
-                            data-bs-target="#property" type="button" role="tab">
-                            <i class="fas fa-home"></i> Property Data
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="site-tab" data-bs-toggle="tab" data-bs-target="#site" type="button"
-                            role="tab">
-                            <i class="fas fa-globe"></i> Site Information
-                        </button>
-                    </li>
-
-                </ul>
-
-                <!-- Tab Content -->
-                <div class="tab-content" id="configTabsContent">
-
-                    <!-- TAB 1: PROPERTY DATA -->
-                    <div class="tab-pane fade show active" id="property" role="tabpanel">
-                        <div class="row">
-                            <!-- Locations Manager -->
-                            <div class="col-md-6 mb-4">
-                                <div class="config-card h-100">
-                                    <div class="config-header d-flex justify-content-between align-items-center">
-                                        <h5 class="config-title"><i class="fas fa-map-marker-alt text-gold"></i>
-                                            Locations</h5>
-                                        <button class="btn btn-sm btn-add" id="addLocationBtn"><i
-                                                class="fas fa-plus"></i> Add New</button>
-                                    </div>
-                                    <div class="config-body">
-                                        <div class="list-group list-group-flush" id="locationsContainer">
-                                            <!-- Dynamic content loaded here -->
-                                            <p class="text-muted">Loading...</p>
-                                        </div>
+                <!-- TAB 1: PROPERTY DATA -->
+                <div class="tab-pane fade show active" id="property" role="tabpanel">
+                    <div class="row g-4">
+                        <!-- Locations -->
+                        <div class="col-md-6">
+                            <div class="config-card h-100">
+                                <div class="config-header">
+                                    <h5 class="config-title"><i class="fas fa-map-marker-alt"></i> Locations</h5>
+                                    <button class="btn-gold" id="addLocationBtn" style="padding:7px 14px;font-size:0.8rem;">
+                                        <i class="fas fa-plus"></i> Add New
+                                    </button>
+                                </div>
+                                <div class="config-body">
+                                    <div id="locationsContainer">
+                                        <p style="color:var(--text-muted);font-size:0.875rem;">
+                                            <div class="spinner-border spinner-border-sm me-2" role="status"></div>Loading...
+                                        </p>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Property Types Manager -->
-                            <div class="col-md-6 mb-4">
-                                <div class="config-card h-100">
-                                    <div class="config-header d-flex justify-content-between align-items-center">
-                                        <h5 class="config-title"><i class="fas fa-tag text-gold"></i> Property Types
-                                        </h5>
-                                        <button class="btn btn-sm btn-add" id="addPropertyTypeBtn"><i
-                                                class="fas fa-plus"></i> Add New</button>
-                                    </div>
-                                    <div class="config-body">
-                                        <div class="list-group list-group-flush" id="propertyTypesContainer">
-                                            <!-- Dynamic content loaded here -->
-                                            <p class="text-muted">Loading...</p>
-                                        </div>
+                        <!-- Property Types -->
+                        <div class="col-md-6">
+                            <div class="config-card h-100">
+                                <div class="config-header">
+                                    <h5 class="config-title"><i class="fas fa-tag"></i> Property Types</h5>
+                                    <button class="btn-gold" id="addPropertyTypeBtn" style="padding:7px 14px;font-size:0.8rem;">
+                                        <i class="fas fa-plus"></i> Add New
+                                    </button>
+                                </div>
+                                <div class="config-body">
+                                    <div id="propertyTypesContainer">
+                                        <p style="color:var(--text-muted);font-size:0.875rem;">
+                                            <div class="spinner-border spinner-border-sm me-2" role="status"></div>Loading...
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- TAB 2: SITE INFORMATION -->
-                    <div class="tab-pane fade" id="site" role="tabpanel">
-                        <div class="config-card">
-                            <div class="config-header">
-                                <h5 class="config-title"><i class="far fa-address-card text-gold"></i> Contact Details
-                                </h5>
-                            </div>
-                            <div class="config-body">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label">Official Phone Number</label>
-                                        <input type="text" class="form-control" id="contactPhone"
-                                            placeholder="+234 XXX XXX XXXX">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Support Email</label>
-                                        <input type="email" class="form-control" id="contactEmail"
-                                            placeholder="contact@example.com">
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label">Office Address</label>
-                                        <textarea class="form-control" id="contactAddress" rows="2"
-                                            placeholder="Enter office address"></textarea>
-                                    </div>
-                                </div>
-                                <div class="mt-4 text-end">
-                                    <button class="btn btn-theme-dark" id="saveContactBtn">Save Changes</button>
-                                </div>
-                            </div>
+                <!-- TAB 2: SITE INFORMATION -->
+                <div class="tab-pane fade" id="site" role="tabpanel">
+
+                    <!-- Contact Details -->
+                    <div class="config-card">
+                        <div class="config-header">
+                            <h5 class="config-title"><i class="far fa-address-card"></i> Contact Details</h5>
                         </div>
-
-                        <div class="config-card">
-                            <div class="config-header">
-                                <h5 class="config-title"><i class="fas fa-share-alt text-gold"></i> Social Media Links
-                                </h5>
+                        <div class="config-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Official Phone Number</label>
+                                    <input type="text" class="form-control" id="contactPhone" placeholder="+234 XXX XXX XXXX">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Support Email</label>
+                                    <input type="email" class="form-control" id="contactEmail" placeholder="contact@example.com">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Office Address</label>
+                                    <textarea class="form-control" id="contactAddress" rows="2" placeholder="Enter office address"></textarea>
+                                </div>
                             </div>
-                            <div class="config-body">
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label class="form-label"><i class="fab fa-facebook text-gold me-1"></i>
-                                            Facebook</label>
-                                        <input type="text" class="form-control" id="socialFacebook"
-                                            placeholder="Facebook Profile URL"
-                                            value="https://www.facebook.com/profile.php?id=100054448062703&mibextid=ZbWKwL">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label"><i class="fab fa-instagram text-gold me-1"></i>
-                                            Instagram</label>
-                                        <input type="text" class="form-control" id="socialInstagram"
-                                            placeholder="Instagram Profile URL"
-                                            value="http://instagram.com/klemandkeysrealtyltd?utm_source=qr">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label"><i class="fab fa-twitter text-gold me-1"></i>
-                                            Twitter</label>
-                                        <input type="text" class="form-control" id="socialTwitter"
-                                            placeholder="Twitter Profile URL"
-                                            value="https://x.com/klemandkeys?t=k_i8JaRTXvJGwYuoO2sXfw&s=09">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label"><i class="fab fa-tiktok text-gold me-1"></i>
-                                            TikTok</label>
-                                        <input type="text" class="form-control" id="socialTiktok"
-                                            placeholder="TikTok Profile URL">
-                                    </div>
-                                </div>
-                                <div class="mt-4 text-end">
-                                    <button class="btn btn-theme-dark" id="saveSocialBtn">Save Changes</button>
-                                </div>
+                            <div class="mt-4 d-flex justify-content-end">
+                                <button class="btn-gold" id="saveContactBtn"><i class="fas fa-save me-2"></i>Save Changes</button>
                             </div>
                         </div>
                     </div>
 
-
+                    <!-- Social Media Links -->
+                    <div class="config-card">
+                        <div class="config-header">
+                            <h5 class="config-title"><i class="fas fa-share-alt"></i> Social Media Links</h5>
+                        </div>
+                        <div class="config-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label"><i class="fab fa-facebook text-gold me-1"></i> Facebook</label>
+                                    <input type="text" class="form-control" id="socialFacebook"
+                                        value="https://www.facebook.com/profile.php?id=100054448062703&mibextid=ZbWKwL">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label"><i class="fab fa-instagram text-gold me-1"></i> Instagram</label>
+                                    <input type="text" class="form-control" id="socialInstagram"
+                                        value="http://instagram.com/klemandkeysrealtyltd?utm_source=qr">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label"><i class="fab fa-twitter text-gold me-1"></i> Twitter / X</label>
+                                    <input type="text" class="form-control" id="socialTwitter"
+                                        value="https://x.com/klemandkeys?t=k_i8JaRTXvJGwYuoO2sXfw&s=09">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label"><i class="fab fa-tiktok text-gold me-1"></i> TikTok</label>
+                                    <input type="text" class="form-control" id="socialTiktok"
+                                        value="https://tiktok.com/@klemandkeysrealtyltd">
+                                </div>
+                            </div>
+                            <div class="mt-4 d-flex justify-content-end">
+                                <button class="btn-gold" id="saveSocialBtn"><i class="fas fa-save me-2"></i>Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
-        </main>
 
-        <!-- Mobile Sidebar Overlay -->
-        <div class="sidebar-overlay" id="sidebarOverlay"></div>
-    </div>
+        </div>
+    </main>
+</div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../assets/js/supabase.js"></script>
-    <script src="../assets/js/admin/auth-guard.js"></script>
-
-    <script src="../assets/js/admin/dashboard.js"></script>
-    <script src="../assets/js/admin/configuration.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../assets/js/supabase.js"></script>
+<script src="../assets/js/admin/auth-guard.js"></script>
+<script src="../assets/js/admin/dashboard.js"></script>
+<script src="../assets/js/admin/configuration.js"></script>
 </body>
-
 </html>

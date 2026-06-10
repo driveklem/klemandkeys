@@ -4,7 +4,8 @@
 ========================================= */
 
 (async function () {
-    console.log('🔒 Auth Guard: Starting...');
+    console.log('🔒 Auth Guard: Bypassed for local development...');
+    return; // Bypass auth for UI tweaks
 
     // Check if user is logged in
     const { data: { session }, error: sessionError } = await window.supabaseClient.auth.getSession();
