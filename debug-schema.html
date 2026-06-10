@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Schema Debugger</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+
+        pre {
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow: auto;
+            max-height: 80vh;
+        }
+
+        .card {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17887589364"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-17887589364');
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="mb-4">Database Schema Inspector</h3>
+                <div class="alert alert-info">
+                    This tool fetches the latest property from your database to reveal the exact columns and data types.
+                </div>
+                <button id="debugBtn" class="btn btn-primary mb-3">Fetch Latest Property Schema</button>
+                <div id="output"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/supabase.js"></script>
+
+    <script>
+        document.getElementById('debugBtn').addEventListener('click', async () => {
+            const output = document.getElementById('output');
+            output.innerHTML = '<div class="spinner-border text-primary" role="status"></div> Fetching data...';
+
+            try {
+                // Wait for client
+                if (!window.supabaseClient) {
+                    await new Promise(r => setTimeout(r, 1000));
+                }
+
+                const { data, error } = await window.supabaseClient
+                    .from('properties')
+                    .select('*')
+                    .limit(1)
+                    .single();
+
+                if (error) throw error;
+
+                if (!data) {
+                    output.innerHTML = '<div class="alert alert-warning">No properties found in database to inspect.</div>';
+                    return;
+                }
+
+                // Analyze fields
+                const keys = Object.keys(data).sort();
+                const analysis = keys.map(key => {
+                    const value = data[key];
+                    const type = Array.isArray(value) ? 'Array' : typeof value;
+                    return `${key}: <span class="text-warning">${type}</span>`;
+                }).join('\n');
+
+                output.innerHTML = `
+                    <h5>Available Columns (${keys.length})</h5>
+                    <pre>${analysis}</pre>
+                    
+                    <h5 class="mt-4">Raw Data Sample</h5>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+
+            } catch (err) {
+                console.error(err);
+                output.innerHTML = `<div class="alert alert-danger">Error: ${err.message}</div>`;
+            }
+        });
+    </script>
+</body>
+
+</html>

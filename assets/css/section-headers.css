@@ -1,0 +1,106 @@
+/* =========================
+   PROFESSIONAL SECTION HEADERS
+========================= */
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-subtitle {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--gold-primary);
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.section-subtitle::before,
+.section-subtitle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 2px;
+    background-color: var(--gold-primary);
+    transform: translateY(-50%);
+}
+
+.section-subtitle::before {
+    left: 0;
+}
+
+.section-subtitle::after {
+    right: 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--blue-dark);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.divider-line {
+    width: 60px;
+    height: 3px;
+    background: var(--gold-primary);
+    border-radius: 2px;
+}
+
+.divider-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--gold-primary);
+    border-radius: 50%;
+}
+
+.section-description {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Left-aligned variation for 'About' section */
+.section-header.text-start {
+    text-align: left;
+    margin-left: 0;
+}
+
+.section-header.text-start .section-subtitle::before {
+    display: none;
+}
+
+.section-header.text-start .section-subtitle {
+    padding-left: 0;
+}
+
+.section-header.text-start .section-description {
+    margin-left: 0;
+}
+
+/* Ensure responsiveness */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+}

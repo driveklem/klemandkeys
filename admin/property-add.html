@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Property | Klem & Keys Admin</title>
+
+    <!-- Dependencies -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Premium Admin CSS -->
+    <link rel="stylesheet" href="../assets/css/admin/dashboard.css">
+    <style>
+        /* Enhanced Form Styles with Brand Colors */
+        :root {
+            --blue-dark: #0b2d4d;
+            --blue-mid: #1a4a7a;
+            --gold-primary: #b8923b;
+            --gold-hover: #d4b15c;
+        }
+
+        .form-progress {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            color: #6b7280;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .step.active .step-number {
+            background: var(--blue-dark);
+            color: white;
+        }
+
+        .step.completed .step-number {
+            background: var(--gold-primary);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .step.active .step-label {
+            color: var(--blue-dark);
+            font-weight: 600;
+        }
+
+        .progress-bar-custom {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--blue-dark), var(--gold-primary));
+            transition: width 0.4s ease;
+            width: 25%;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--blue-dark);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        .form-label.required::after {
+            content: '*';
+            color: #dc3545;
+            margin-left: 4px;
+        }
+
+        .form-control,
+        .form-select {
+            border: 1.5px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 16px;
+            transition: all 0.2s;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 0 3px rgba(184, 146, 59, 0.1);
+        }
+
+        .form-help {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 6px;
+        }
+
+        /* Image Upload Areas */
+        .image-upload-area {
+            border: 2px dashed #d1d5db;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            background: #f9fafb;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .image-upload-area:hover {
+            border-color: var(--gold-primary);
+            background: rgba(184, 146, 59, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #9ca3af;
+            margin-bottom: 15px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        /* Amenities Grid */
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .amenity-checkbox {
+            position: relative;
+        }
+
+        .amenity-input {
+            display: none;
+        }
+
+        .amenity-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .amenity-input:checked+.amenity-label {
+            border-color: var(--gold-primary);
+            background: rgba(184, 146, 59, 0.05);
+            color: var(--blue-dark);
+        }
+
+        .amenity-label i {
+            color: var(--gold-primary);
+        }
+
+        /* Navigation Buttons */
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .btn-next-step,
+        .btn-prev-step,
+        .btn-submit-property {
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-next-step,
+        .btn-submit-property {
+            background: var(--blue-dark);
+            color: white;
+        }
+
+        .btn-next-step:hover,
+        .btn-submit-property:hover {
+            background: var(--blue-mid);
+            transform: translateY(-2px);
+        }
+
+        .btn-prev-step {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .btn-prev-step:hover {
+            background: #e5e7eb;
+        }
+
+        .btn-save-draft {
+            background: white;
+            border: 1.5px solid var(--gold-primary);
+            color: var(--gold-primary);
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .btn-save-draft:hover {
+            background: rgba(184, 146, 59, 0.05);
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17887589364"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-17887589364');
+    </script>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="brand-wrapper">
+                    <img src="../assets/img/logo-1.png" alt="Logo" class="brand-logo">
+                </a>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="menu-label">Main Menu</li>
+                <li class="menu-item">
+                    <a href="dashboard.html" class="menu-link">
+                        <i class="fas fa-th-large"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="properties.html" class="menu-link">
+                        <i class="fas fa-building"></i>
+                        <span>Properties</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="property-add.html" class="menu-link active">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Add Property</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="inquiries.html" class="menu-link">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Inquiries</span>
+                        <span class="badge bg-danger ms-auto" id="unreadInquiriesBadge" style="display: none;">0</span>
+                    </a>
+                </li>
+
+                <li class="menu-label">Settings</li>
+                <li class="menu-item">
+                    <a href="configuration.html" class="menu-link">
+                        <i class="fas fa-cog"></i>
+                        <span>Configuration</span>
+                    </a>
+                </li>
+                <li class="menu-item mt-4">
+                    <a href="../index.html" class="menu-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>Back to Website</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">A</div>
+                    <div class="user-details">
+                        <h4>Admin User</h4>
+                        <span>Super Admin</span>
+                    </div>
+                </div>
+                <button id="logoutBtn" class="btn-logout-ghost">
+                    <i class="fas fa-sign-out-alt"></i> Sign Out
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="topbar">
+                <div class="d-flex align-items-center">
+                    <button class="sidebar-toggle" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="page-path">
+                        Pages / Properties / <strong>Add New</strong>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h1 class="welcome-title">Add New Property</h1>
+                        <p class="welcome-subtitle">Complete all steps to publish a new listing</p>
+                    </div>
+                </div>
+
+                <!-- Progress Indicator -->
+                <div class="form-progress">
+                    <div class="progress-steps">
+                        <div class="step active" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Basic Info</div>
+                        </div>
+                        <div class="step" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Details</div>
+                        </div>
+                        <div class="step" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Media</div>
+                        </div>
+                        <div class="step" data-step="4">
+                            <div class="step-number">4</div>
+                            <div class="step-label">Pricing</div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-custom">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <!-- Property Form -->
+                <form id="addPropertyForm">
+                    <!-- Step 1: Basic Information -->
+                    <div class="form-step active" id="step1">
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <i class="fas fa-info-circle me-2"></i> Basic Information
+                            </h2>
+
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label for="propertyTitle" class="form-label required">Property Title</label>
+                                    <input type="text" class="form-control" id="propertyTitle"
+                                        placeholder="e.g., Luxury Modern Villa in Asokoro" required>
+                                    <div class="form-help">Make it descriptive and appealing</div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="propertyType" class="form-label required">Property Type</label>
+                                    <select class="form-select" id="propertyType" required>
+                                        <option value="">Select Type</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row g-4 mt-3">
+                                <div class="col-md-6">
+                                    <label for="propertyStatus" class="form-label required">Status</label>
+                                    <select class="form-select" id="propertyStatus" required>
+                                        <option value="available">Available</option>
+                                        <option value="sold">Sold</option>
+                                        <option value="rental">For Rent</option>
+                                        <option value="pending">Pending</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <label for="propertyDescription" class="form-label required">Description</label>
+                                <textarea class="form-control" id="propertyDescription" rows="5"
+                                    placeholder="Describe the property in detail..." required></textarea>
+                                <div class="form-help"><span id="charCount">0</span>/2000 characters</div>
+                            </div>
+                        </div>
+
+                        <div class="form-navigation">
+                            <div></div>
+                            <button type="button" class="btn-next-step" data-next="2">
+                                Next: Property Details <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Property Details -->
+                    <div class="form-step" id="step2">
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <i class="fas fa-home me-2"></i> Property Details
+                            </h2>
+
+                            <div class="row g-4">
+                                <div class="col-md-4">
+                                    <label for="bedrooms" class="form-label">Bedrooms</label>
+                                    <select class="form-select" id="bedrooms">
+                                        <option value="">Select</option>
+                                        <option value="0">Studio</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5+</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="bathrooms" class="form-label">Bathrooms</label>
+                                    <select class="form-select" id="bathrooms">
+                                        <option value="">Select</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5+</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="parkingSpaces" class="form-label">Parking Spaces</label>
+                                    <select class="form-select" id="parkingSpaces">
+                                        <option value="">Select</option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4+</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row g-4 mt-3">
+                                <div class="col-md-6">
+                                    <label for="areaSize" class="form-label">Area Size</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="areaSize" placeholder="450">
+                                        <select class="form-select" id="areaUnit" style="max-width: 150px;">
+                                            <option value="sqm">sqm</option>
+                                            <option value="sqft">sqft</option>
+                                            <option value="acres">Acres</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="parkingSpaces" class="form-label">Parking Spaces</label>
+                                    <input type="number" class="form-control" id="parkingSpaces" min="0" max="10"
+                                        placeholder="2">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="yearBuilt" class="form-label">Year Built</label>
+                                    <input type="number" class="form-control" id="yearBuilt" min="1900" max="2030"
+                                        placeholder="2024">
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <label class="form-label">Amenities & Features</label>
+                                <div class="amenities-grid">
+                                    <div class="amenity-checkbox">
+                                        <input type="checkbox" id="amenityPool" class="amenity-checkbox"
+                                            value="Swimming Pool">
+                                        <label for="amenityPool" class="amenity-label">
+                                            <i class="fas fa-swimming-pool"></i> Swimming Pool
+                                        </label>
+                                    </div>
+                                    <div class="amenity-checkbox">
+                                        <input type="checkbox" id="amenityGarden" class="amenity-checkbox"
+                                            value="Garden">
+                                        <label for="amenityGarden" class="amenity-label">
+                                            <i class="fas fa-tree"></i> Garden
+                                        </label>
+                                    </div>
+                                    <div class="amenity-checkbox">
+                                        <input type="checkbox" id="amenityGym" class="amenity-checkbox" value="Gym">
+                                        <label for="amenityGym" class="amenity-label">
+                                            <i class="fas fa-dumbbell"></i> Gym
+                                        </label>
+                                    </div>
+                                    <div class="amenity-checkbox">
+                                        <input type="checkbox" id="amenitySecurity" class="amenity-checkbox"
+                                            value="24/7 Security">
+                                        <label for="amenitySecurity" class="amenity-label">
+                                            <i class="fas fa-shield-alt"></i> 24/7 Security
+                                        </label>
+                                    </div>
+                                    <div class="amenity-checkbox">
+                                        <input type="checkbox" id="amenitySolar" class="amenity-checkbox"
+                                            value="Solar Power">
+                                        <label for="amenitySolar" class="amenity-label">
+                                            <i class="fas fa-solar-panel"></i> Solar Power
+                                        </label>
+                                    </div>
+                                    <div class="amenity-checkbox">
+                                        <input type="checkbox" id="amenityGenerator" class="amenity-checkbox"
+                                            value="Generator">
+                                        <label for="amenityGenerator" class="amenity-label">
+                                            <i class="fas fa-bolt"></i> Generator
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="btn-prev-step" data-prev="1">
+                                <i class="fas fa-arrow-left me-2"></i> Back
+                            </button>
+                            <button type="button" class="btn-next-step" data-next="3">
+                                Next: Media <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Media Upload -->
+                    <div class="form-step" id="step3">
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <i class="fas fa-images me-2"></i> Property Media
+                            </h2>
+
+                            <div class="mb-4">
+                                <label class="form-label required">Main Property Image</label>
+                                <div class="image-upload-area" onclick="document.getElementById('mainImage').click()">
+                                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                    <p class="mb-2"><strong>Drag & drop main image here</strong></p>
+                                    <p class="text-muted small">or click to browse (Recommended: 1200x800px)</p>
+                                    <input type="file" id="mainImage" accept="image/*" class="file-input">
+                                </div>
+                                <div id="mainImagePreview" class="mt-3"></div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label">Gallery Images</label>
+                                <div class="image-upload-area"
+                                    onclick="document.getElementById('galleryImages').click()">
+                                    <i class="fas fa-images upload-icon"></i>
+                                    <p class="mb-2"><strong>Add gallery images</strong></p>
+                                    <p class="text-muted small">Upload up to 20 images (800x600px or larger)</p>
+                                    <input type="file" id="galleryImages" accept="image/*" class="file-input" multiple>
+                                </div>
+                                <div id="galleryPreview" class="mt-3"></div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="btn-prev-step" data-prev="2">
+                                <i class="fas fa-arrow-left me-2"></i> Back
+                            </button>
+                            <button type="button" class="btn-next-step" data-next="4">
+                                Next: Pricing & Location <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Pricing & Location -->
+                    <div class="form-step" id="step4">
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <i class="fas fa-map-marker-alt me-2"></i> Location & Pricing
+                            </h2>
+
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label for="propertyPrice" class="form-label required">Price (₦)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">₦</span>
+                                        <input type="number" class="form-control" id="propertyPrice"
+                                            placeholder="285000000" style="min-width: 200px;" required>
+                                        <select class="form-select" id="priceUnit" style="max-width: 150px;">
+                                            <option value="fixed">Fixed</option>
+                                            <option value="negotiable">Negotiable</option>
+                                            <option value="monthly">Monthly</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Currency selector removed -->
+                            </div>
+
+                            <div class="row g-4 mt-3">
+                                <div class="col-md-6">
+                                    <label for="propertyLocation" class="form-label required">Location</label>
+                                    <select class="form-select" id="propertyLocation" required>
+                                        <option value="">Select Location</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="mt-4">
+                                <label for="propertyAddress" class="form-label">Full Address</label>
+                                <textarea class="form-control" id="propertyAddress" rows="3"
+                                    placeholder="Enter complete address..."></textarea>
+                            </div>
+
+                            <div class="mt-4">
+                                <label class="form-label">Additional Information</label>
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="hasCoO">
+                                            <label class="form-check-label" for="hasCoO">
+                                                <i class="fas fa-file-contract text-warning me-2"></i>
+                                                Certificate of Occupancy
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="hasSurvey">
+                                            <label class="form-check-label" for="hasSurvey">
+                                                <i class="fas fa-drafting-compass text-info me-2"></i>
+                                                Survey Plan Available
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="hasApproval">
+                                            <label class="form-check-label" for="hasApproval">
+                                                <i class="fas fa-clipboard-check text-success me-2"></i>
+                                                Government Approval
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="btn-prev-step" data-prev="3">
+                                <i class="fas fa-arrow-left me-2"></i> Back
+                            </button>
+                            <div class="d-flex gap-3">
+                                <button type="submit" class="btn-submit-property">
+                                    <i class="fas fa-paper-plane me-2"></i> Publish Property
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </main>
+
+        <!-- Mobile Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/admin/dashboard.js"></script>
+    <script>
+        // Multi-step form logic
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        // Character counter
+        document.getElementById('propertyDescription').addEventListener('input', function () {
+            document.getElementById('charCount').textContent = this.value.length;
+        });
+
+        // Next button handlers with validation
+        document.querySelectorAll('.btn-next-step').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const nextStep = parseInt(this.dataset.next);
+
+                // Validate current step before proceeding
+                if (validateStep(currentStep)) {
+                    goToStep(nextStep);
+                } else {
+                    showToast('Please fill in all required fields before proceeding.', 'error');
+                }
+            });
+        });
+
+        // Previous button handlers
+        document.querySelectorAll('.btn-prev-step').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const prevStep = parseInt(this.dataset.prev);
+                goToStep(prevStep);
+            });
+        });
+
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'error' ? '#ef4444' : '#10b981'};
+                color: white;
+                padding: 16px 24px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                font-weight: 500;
+                animation: slideIn 0.3s ease;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.3s';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function validateStep(step) {
+            let isValid = true;
+
+            if (step === 1) {
+                // Validate Basic Info
+                const title = document.getElementById('propertyTitle');
+                const type = document.getElementById('propertyType');
+                const status = document.getElementById('propertyStatus');
+                const description = document.getElementById('propertyDescription');
+
+                if (!title.value.trim()) {
+                    title.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    title.classList.remove('is-invalid');
+                }
+
+                if (!type.value) {
+                    type.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    type.classList.remove('is-invalid');
+                }
+
+                if (!status.value) {
+                    status.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    status.classList.remove('is-invalid');
+                }
+
+                if (!description.value.trim()) {
+                    description.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    description.classList.remove('is-invalid');
+                }
+            }
+
+            if (step === 3) {
+                // Validate Images (Main Image Required)
+                const mainImage = document.getElementById('mainImage');
+                // Check if file selected OR if in edit mode (might already have image, but simple check for now)
+                // For edit mode, we might need a flag or check if specific UI element exists.
+                // Assuming new property needs file.
+                if (mainImage.files.length === 0 && !mainImage.getAttribute('data-has-image')) {
+                    // For improved UX, we could highlight the upload area
+                    isValid = false;
+                }
+            }
+
+            if (step === 4) { // While there is no "Next" button on step 4, this might be useful for submit
+                // Validate Pricing & Location
+                const price = document.getElementById('propertyPrice');
+                const city = document.getElementById('propertyCity');
+                const state = document.getElementById('propertyState');
+
+                if (!price.value || parseFloat(price.value) <= 0) {
+                    price.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    price.classList.remove('is-invalid');
+                }
+
+                if (!city.value.trim()) {
+                    city.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    city.classList.remove('is-invalid');
+                }
+
+                if (!state.value) {
+                    state.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    state.classList.remove('is-invalid');
+                }
+            }
+
+            return isValid;
+        }
+
+        function goToStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.step').forEach(s => {
+                s.classList.remove('active');
+                s.classList.remove('completed');
+            });
+
+            // Show target step
+            document.getElementById(`step${step}`).classList.add('active');
+
+            // Update progress
+            for (let i = 1; i <= totalSteps; i++) {
+                const stepEl = document.querySelector(`.step[data-step="${i}"]`);
+                if (i < step) {
+                    stepEl.classList.add('completed');
+                } else if (i === step) {
+                    stepEl.classList.add('active');
+                }
+            }
+
+            // Update progress bar
+            const progress = ((step - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            currentStep = step;
+        }
+
+
+        // Form submission logic moved to assets/js/admin/property-add.js
+    </script>
+
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase.js"></script>
+    <script src="../assets/js/admin/auth-guard.js"></script>
+    <script src="../assets/js/admin/dashboard.js"></script>
+    <script src="../assets/js/admin/property-add.js"></script>
+
+    <!-- ROBUST SIDEBAR TOGGLE FIX -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggle = document.getElementById('sidebarToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+
+            if (toggle && sidebar && overlay) {
+                // Ensure click is handled
+                toggle.onclick = function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Sidebar toggle clicked (inline fix)');
+                    sidebar.classList.toggle('show');
+                    overlay.classList.toggle('show');
+                };
+
+                overlay.onclick = function () {
+                    sidebar.classList.remove('show');
+                    overlay.classList.remove('show');
+                };
+            } else {
+                console.error('Sidebar elements not found:', { toggle, sidebar, overlay });
+            }
+        });
+    </script>
+</body>

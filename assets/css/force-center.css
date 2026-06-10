@@ -1,0 +1,27 @@
+/* =========================
+   FORCE CENTER ALIGNMENT FOR WHY CHOOSE US
+========================= */
+
+.why-choose-section .section-subtitle,
+.why-choose-section .section-title,
+.why-choose-section .section-description-left {
+    text-align: center !important;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.why-choose-section .section-divider-left {
+    display: flex !important;
+    justify-content: center !important;
+    margin-bottom: 1.5rem;
+}
+
+.why-choose-section .col-lg-6[data-aos="fade-right"] {
+    text-align: center !important;
+}
+
+/* Ensure divider line is centered */
+.why-choose-section .divider-line {
+    margin: 0 auto;
+}

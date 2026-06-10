@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Klem and Keys</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+  <link rel="stylesheet" href="assets/css/about-us.css">
+  <link rel="stylesheet" href="assets/css/add-property.css">
+  <link rel="stylesheet" href="assets/css/admin-login.css">
+  <link rel="stylesheet" href="assets/css/contact.css">
+  <link rel="stylesheet" href="assets/css/corporate-info.css">
+  <link rel="stylesheet" href="assets/css/dashboard.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="assets/css/index1.css">
+  <link rel="stylesheet" href="assets/css/manage-properties.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/properties.css">
+  <link rel="stylesheet" href="assets/css/property-details.css">
+  <link rel="stylesheet" href="assets/css/service.css">
+  <link rel="stylesheet" href="assets/css/themes.css">
+  <link rel="stylesheet" href="assets/css/update-property.css">
+  <style>
+    /* Fix for agent card overflow */
+    .agent-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .agent-contact a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-color);
+      /* Fallback */
+      text-decoration: none;
+      font-size: 0.95rem;
+      word-break: break-all;
+      /* Prevent email overflow */
+      overflow-wrap: break-word;
+      /* Modern wrapping */
+      max-width: 100%;
+    }
+
+    .agent-contact a i {
+      color: var(--primary-color);
+      flex-shrink: 0;
+      /* Prevent icon shrinking */
+    }
+
+    @media (max-width: 991px) {
+      .agent-contact a {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17887589364"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'AW-17887589364');
+  </script>
+</head>
+
+<body><!-- ========================================
+     KLEM & KEYS REALTY - PROPERTY DETAILS PAGE
+======================================== -->
+
+
+
+  <!-- Property Details Section -->
+  <section class="section property-details-section">
+    <div class="container">
+      <!-- Property Header -->
+      <div class="property-header">
+        <div class="property-breadcrumb">
+          <a href="index.html">Home</a>
+          <i class="fas fa-chevron-right mx-2"></i>
+          <a href="properties.html">Properties</a>
+          <i class="fas fa-chevron-right mx-2"></i>
+          <span>Property Details</span>
+        </div>
+
+        <div class="property-title-row">
+          <div class="property-title-info">
+            <h1 class="property-main-title">Luxury Modern Villa</h1>
+            <div class="property-location">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Asokoro, Abuja</span>
+              <span class="property-id">Property ID: KK-2024-001</span>
+            </div>
+          </div>
+
+          <div class="property-price-section">
+            <div class="property-price">₦285,000,000</div>
+            <div class="property-status status-available">Available</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Main Content (Left) -->
+        <div class="col-lg-8">
+          <!-- Property Gallery -->
+          <div class="property-gallery">
+            <!-- Main Image -->
+            <div class="property-main-image">
+              <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=1200"
+                alt="Luxury Modern Villa - Main View" id="mainPropertyImage">
+            </div>
+
+            <!-- Thumbnail Gallery -->
+            <div class="property-thumbnails">
+              <div class="thumbnail active"
+                data-image="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=1200">
+                <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=300" alt="Front View">
+              </div>
+              <div class="thumbnail"
+                data-image="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1200">
+                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=300" alt="Living Room">
+              </div>
+              <div class="thumbnail"
+                data-image="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=1200">
+                <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=300" alt="Master Bedroom">
+              </div>
+              <div class="thumbnail"
+                data-image="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=300" alt="Kitchen">
+              </div>
+              <div class="thumbnail"
+                data-image="https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=1200">
+                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=300" alt="Garden">
+              </div>
+              <div class="thumbnail"
+                data-image="https://images.unsplash.com/photo-1600607687644-c7171b42498b?q=80&w=1200">
+                <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498b?q=80&w=300" alt="Swimming Pool">
+              </div>
+              <div class="thumbnail-count">+12 more</div>
+            </div>
+          </div>
+
+          <!-- Property Description -->
+          <div class="property-description-card">
+            <h2 class="section-title">Property Description</h2>
+            <div class="description-content">
+              <p>This stunning modern villa offers luxurious living at its finest. Situated in the prestigious Asokoro
+                district, this property combines contemporary design with premium finishes and smart home technology.
+              </p>
+
+              <p>The villa features an open-concept living area with floor-to-ceiling windows offering panoramic views
+                of the city. The gourmet kitchen is equipped with state-of-the-art appliances, custom cabinetry, and a
+                spacious island perfect for entertaining.</p>
+
+              <h3>Key Features:</h3>
+              <ul>
+                <li>Smart home automation system with voice control</li>
+                <li>Heated swimming pool with automated cleaning</li>
+                <li>Landscaped garden with automated irrigation</li>
+                <li>Home theater with surround sound system</li>
+                <li>Wine cellar and temperature-controlled storage</li>
+                <li>Four-car garage with electric vehicle charging</li>
+                <li>Solar panel system with battery backup</li>
+                <li>24/7 security surveillance with biometric access</li>
+              </ul>
+
+              <p>This property represents an excellent investment opportunity in one of Abuja's most sought-after
+                neighborhoods. Recent comparable sales in the area have shown consistent appreciation in value.</p>
+            </div>
+          </div>
+
+          <!-- Property Features -->
+          <div class="property-features-card">
+            <h2 class="section-title">Property Features</h2>
+            <div class="features-grid">
+              <div class="feature-item">
+                <i class="fas fa-home"></i>
+                <div>
+                  <strong>Property Type</strong>
+                  <span>Detached House</span>
+                </div>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-bed"></i>
+                <div>
+                  <strong>Bedrooms</strong>
+                  <span>5</span>
+                </div>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-bath"></i>
+                <div>
+                  <strong>Bathrooms</strong>
+                  <span>4</span>
+                </div>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-ruler-combined"></i>
+                <div>
+                  <strong>Square Feet</strong>
+                  <span>4,845 sq.ft. (450 sqm)</span>
+                </div>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-calendar-alt"></i>
+                <div>
+                  <strong>Year Built</strong>
+                  <span>2022</span>
+                </div>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-layer-group"></i>
+                <div>
+                  <strong>Floors</strong>
+                  <span>2</span>
+                </div>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-warehouse"></i>
+                <div>
+                  <strong>Garage</strong>
+                  <span>4 Cars</span>
+                </div>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-swimming-pool"></i>
+                <div>
+                  <strong>Swimming Pool</strong>
+                  <span>Yes (Heated)</span>
+                </div>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-tree"></i>
+                <div>
+                  <strong>Garden</strong>
+                  <span>Landscaped</span>
+                </div>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-shield-alt"></i>
+                <div>
+                  <strong>Security</strong>
+                  <span>24/7 Surveillance</span>
+                </div>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-solar-panel"></i>
+                <div>
+                  <strong>Solar Power</strong>
+                  <span>10kW System</span>
+                </div>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-wifi"></i>
+                <div>
+                  <strong>Smart Home</strong>
+                  <span>Fully Automated</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End of Left Column -->
+
+        <!-- Sidebar (Right) -->
+        <div class="col-lg-4">
+          <!-- Live Inspection Notice -->
+          <div class="inspection-notice-card">
+            <h3 class="inspection-title">
+              <i class="fas fa-video me-2"></i> Live Virtual Inspection
+            </h3>
+            <p class="inspection-text">
+              Can't make it to the site? We offer real-time live video inspections to give you a comprehensive tour from
+              anywhere in the world.
+            </p>
+            <div class="inspection-note">
+              <i class="fas fa-info-circle"></i>
+              <span>Note: This premium service attracts additional charges depending on the property location.</span>
+            </div>
+          </div>
+
+          <!-- Inquiry Form -->
+          <div class="property-inquiry-card">
+            <h3 class="inquiry-title">
+              <i class="fas fa-info-circle me-2"></i>Schedule a Viewing
+            </h3>
+            <p class="inquiry-description">
+              Interested in this property? Contact us to schedule a viewing or request more information.
+            </p>
+
+            <form class="inquiry-form" id="propertyInquiryForm">
+              <div class="form-group">
+                <label for="inquiryName" class="form-label">Full Name *</label>
+                <input type="text" class="form-control inquiry-input" id="inquiryName" placeholder="Your full name"
+                  required>
+              </div>
+
+              <div class="form-group">
+                <label for="inquiryEmail" class="form-label">Email Address *</label>
+                <input type="email" class="form-control inquiry-input" id="inquiryEmail" placeholder="you@example.com"
+                  required>
+              </div>
+
+              <div class="form-group">
+                <label for="inquiryPhone" class="form-label">Phone Number *</label>
+                <input type="tel" class="form-control inquiry-input" id="inquiryPhone" placeholder="0812 3456 7890"
+                  required>
+              </div>
+
+              <div class="form-group">
+                <label for="inquiryMessage" class="form-label">Message</label>
+                <textarea class="form-control inquiry-textarea" id="inquiryMessage" rows="4"
+                  placeholder="Tell us about your interest in this property..."></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="inquiryDate" class="form-label">Preferred Viewing Date</label>
+                <input type="date" class="form-control inquiry-input" id="inquiryDate" min="">
+              </div>
+
+              <button type="submit" class="btn btn-inquiry-submit">
+                <i class="fas fa-paper-plane me-2"></i> Send Inquiry
+              </button>
+
+              <p class="inquiry-note">
+                <i class="fas fa-shield-alt me-2"></i>
+                Your information is secure and will not be shared with third parties.
+              </p>
+            </form>
+          </div>
+
+          <!-- Property Agent -->
+          <div class="property-agent-card">
+            <h3 class="agent-title">Property Consultant</h3>
+            <div class="agent-profile">
+              <div class="agent-avatar">
+                <img src="assets/img/founder.jpg" alt="Adedokun Clement">
+              </div>
+              <div class="agent-info">
+                <h4>Adedokun Clement</h4>
+                <p class="agent-role">Senior Property Consultant</p>
+                <div class="agent-contact">
+                  <a href="tel:+2347072137505" class="agent-phone">
+                    <i class="fas fa-phone"></i> +234 707 213 7505
+                  </a>
+                  <a href="mailto:contact@klemkeysrealty.com" class="agent-email">
+                    <i class="fas fa-envelope"></i> contact@klemkeysrealty.com
+                  </a>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-contact-agent">
+              <i class="fab fa-whatsapp me-2"></i> WhatsApp Agent
+            </button>
+          </div>
+
+          <!-- Property Summary -->
+          <div class="property-summary-card">
+            <h3 class="summary-title">Property Summary</h3>
+            <div class="summary-list" id="propertySummaryList">
+              <!-- Dynamic Summary Loaded via JS -->
+              <div class="text-center py-3">
+                <div class="spinner-border text-primary spinner-border-sm" role="status"></div>
+              </div>
+            </div>
+
+            <div class="property-actions">
+              <button class="btn btn-print-summary" id="printSummary">
+                <i class="fas fa-print me-2"></i> Print Summary
+              </button>
+              <button class="btn btn-share-property" id="shareProperty">
+                <i class="fas fa-share-alt me-2"></i> Share
+              </button>
+            </div>
+          </div>
+
+          <!-- Similar Properties -->
+          <div class="similar-properties-card">
+            <h3 class="similar-title">Similar Properties</h3>
+            <div class="similar-properties-list" id="similarPropertiesList">
+              <!-- Dynamic Similar Properties Loaded via JS -->
+              <div class="text-center py-3">
+                <div class="spinner-border text-primary spinner-border-sm" role="status"></div>
+              </div>
+            </div>
+
+            <a href="properties.html" class="btn btn-view-all-similar">
+              View All Properties <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal for Fullscreen Gallery -->
+  <div class="modal gallery-modal" id="galleryModal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-image-container">
+        <img src="" alt="" id="modalImage">
+      </div>
+      <div class="modal-nav">
+        <button class="modal-nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+        <button class="modal-nav-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- ========================================
+       MODERN FOOTER V2 (Redesign)
+  ======================================== -->
+  <footer class="modern-footer-v2">
+    <div class="container">
+      <div class="row gy-5">
+
+        <!-- Brand & Socials -->
+        <div class="col-lg-4 col-md-12">
+          <div class="ft-col">
+            <a href="index.html" class="ft-logo">
+              <img src="assets/img/logo-1.png" alt="Klem & Keys">
+            </a>
+            <p class="ft-desc">
+              Your trusted partner for property acquisition, investment advisory, and real estate solutions across
+              Nigeria.
+            </p>
+            <div class="ft-socials" id="footerSocials">
+              <a href="https://www.facebook.com/profile.php?id=100054448062703&mibextid=ZbWKwL"
+                class="ft-social-btn box-icon-facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://x.com/klemandkeys?t=k_i8JaRTXvJGwYuoO2sXfw&s=09" class="ft-social-btn box-icon-twitter"
+                target="_blank"><i class="fab fa-twitter"></i></a>
+              <a href="http://instagram.com/klemandkeysrealtyltd?utm_source=qr" class="ft-social-btn box-icon-instagram"
+                target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://tiktok.com/@klemandkeysrealtyltd" class="ft-social-btn box-icon-tiktok"
+                target="_blank"><i class="fab fa-tiktok"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-lg-3 col-md-6">
+          <div class="ft-col">
+            <h4 class="ft-heading">Quick Links</h4>
+            <ul class="ft-links">
+              <li><a href="index.html" class="ft-link">Home</a></li>
+              <li><a href="properties.html" class="ft-link">Properties</a></li>
+              <li><a href="about.html" class="ft-link">About Us</a></li>
+              <li><a href="services.html" class="ft-link">Our Services</a></li>
+              <li><a href="contact.html" class="ft-link">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="col-lg-4 col-md-6">
+          <div class="ft-col">
+            <h4 class="ft-heading">Contact Us</h4>
+            <div class="ft-contact-list">
+              <div class="ft-contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span id="footerAddress">Block A2, Sunbuilt Estate, Kagini District, Abuja</span>
+              </div>
+              <div class="ft-contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <a href="tel:+2347072137505" id="footerPhone">+234 707 213 7505</a>
+              </div>
+              <div class="ft-contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:contact@klemandkeysrealty.com" id="footerEmail">contact@klemandkeysrealty.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="ft-bottom">
+        <p class="mb-0">© 2025 Klem & Keys Realty. All Rights Reserved.</p>
+        <div class="ft-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-conditions.html">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/footer.js?v=dynamic"></script>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase.js"></script>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="assets/js/property-detail.js"></script>
+</body>
+
+</html>

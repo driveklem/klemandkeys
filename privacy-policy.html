@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Privacy Policy - Klem and Keys Realty</title>
+    <meta name="description"
+        content="Privacy Policy for Klem & Keys Realty Limited. Learn how we collect, use, and protect your personal information.">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/corporate-info.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/nav.css">
+    <link rel="stylesheet" href="assets/css/themes.css">
+    <style>
+        /* Modern Footer V2 Styles */
+        .modern-footer-v2 {
+            background-color: #0B1623;
+            color: #b0b0b0;
+            padding: 5rem 0 2rem;
+            font-size: 0.95rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ft-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .ft-logo img {
+            height: 50px;
+            filter: brightness(0) invert(1);
+            margin-bottom: 1.5rem;
+        }
+
+        .ft-desc {
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 320px;
+        }
+
+        .ft-heading {
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ft-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .ft-link {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .ft-link:hover {
+            color: var(--gold-primary);
+            transform: translateX(5px);
+        }
+
+        .ft-contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .ft-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            color: #b0b0b0;
+            line-height: 1.4;
+        }
+
+        .ft-contact-item i {
+            color: var(--gold-primary);
+            font-size: 1.1rem;
+            margin-top: 3px;
+            min-width: 20px;
+        }
+
+        .ft-contact-item a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .ft-contact-item a:hover {
+            color: var(--gold-primary);
+        }
+
+        .ft-socials {
+            display: flex;
+            gap: 12px;
+            margin-top: auto;
+        }
+
+        .ft-social-btn {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .ft-social-btn:hover {
+            background: var(--gold-primary);
+            color: #0B1623;
+            transform: translateY(-3px);
+        }
+
+        .ft-bottom {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .ft-legal {
+            display: flex;
+            gap: 20px;
+        }
+
+        .ft-legal a {
+            color: #777;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .ft-legal a:hover {
+            color: var(--gold-primary);
+        }
+
+        @media (max-width: 768px) {
+            .ft-bottom {
+                flex-direction: column;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .ft-col {
+                align-items: flex-start !important;
+                text-align: left !important;
+            }
+        }
+
+        /* CTA Section Styles */
+        .final-cta-section {
+            position: relative;
+            padding: 120px 0;
+            background-image: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=2400');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+
+        .cta-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(11, 45, 77, 0.95) 0%, rgba(26, 74, 122, 0.92) 100%);
+            z-index: 1;
+        }
+
+        .cta-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .cta-content-wrapper {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .cta-icon-badge {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-hover));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2.5rem;
+            box-shadow: 0 15px 50px rgba(184, 146, 59, 0.5);
+        }
+
+        .cta-icon-badge i {
+            font-size: 2.5rem;
+            color: var(--white);
+        }
+
+        .cta-title {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            max-width: 750px;
+            margin: 0 auto 3rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-features {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .cta-feature-item i {
+            color: var(--gold-primary);
+            font-size: 1.3rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-cta-primary-modern {
+            padding: 20px 45px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-hover));
+            color: var(--white);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 12px 40px rgba(184, 146, 59, 0.5);
+            border: 2px solid transparent;
+        }
+
+        .btn-cta-primary-modern:hover {
+            background: var(--white);
+            color: var(--gold-primary);
+            border-color: var(--white);
+            transform: translateY(-4px);
+            box-shadow: 0 18px 60px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-cta-secondary-modern {
+            padding: 20px 45px;
+            background: transparent;
+            color: var(--white);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-cta-secondary-modern:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--white);
+            color: var(--white);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-trust-indicators {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .trust-item i {
+            color: var(--gold-primary);
+            font-size: 1.2rem;
+        }
+
+        .trust-divider {
+            width: 1px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17887589364"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-17887589364');
+    </script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/img/logo-2.png" alt="Klem & Keys Realty" class="logo-transparent">
+                <img src="assets/img/logo-1.png" alt="Klem & Keys Realty" class="logo-solid">
+            </a>
+
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="nav-icon bi bi-house-door"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="properties.html">
+                            <i class="nav-icon bi bi-building"></i>
+                            <span>Properties</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">
+                            <i class="nav-icon bi bi-info-circle"></i>
+                            <span>About Us</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">
+                            <i class="nav-icon bi bi-gear"></i>
+                            <span>Services</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="objects.html">
+                            <i class="nav-icon bi bi-briefcase"></i>
+                            <span>Corporate Info</span>
+                        </a>
+                    </li>
+
+                    <!-- CTA Button -->
+                    <li class="nav-item ms-lg-3">
+                        <a href="contact.html" class="btn btn-navbar-cta">
+                            <i class="bi bi-telephone"></i>
+                            <span>Contact Us</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="corporate-hero-v2">
+        <div class="corporate-hero-overlay"></div>
+        <div class="container relative-z2">
+            <div class="row justify-content-center">
+                <div class="col-lg-9 text-center">
+                    <div class="hero-text-wrapper">
+                        <h1 class="corp-title-text">
+                            Privacy Policy<br>
+                            <span
+                                style="display:block; font-size: 0.4em; margin-top: 15px; font-weight: 400; opacity: 0.9;">
+                                How we collect, use, and protect your personal information
+                            </span>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="section objects-main-section">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar Navigation -->
+                <div class="col-lg-3">
+                    <div class="corporate-sidebar">
+                        <div class="sidebar-header">
+                            <h3><i class="fas fa-shield-alt me-2"></i>Contents</h3>
+                        </div>
+                        <nav class="sidebar-nav">
+                            <ul class="nav-list">
+                                <li class="nav-item">
+                                    <a href="#introduction" class="nav-link active">
+                                        <i class="fas fa-info-circle"></i>
+                                        <span>Introduction</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#information-collect" class="nav-link">
+                                        <i class="fas fa-database"></i>
+                                        <span>Information We Collect</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#how-we-use" class="nav-link">
+                                        <i class="fas fa-cogs"></i>
+                                        <span>How We Use Information</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#data-security" class="nav-link">
+                                        <i class="fas fa-lock"></i>
+                                        <span>Data Security</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#cookies" class="nav-link">
+                                        <i class="fas fa-cookie-bite"></i>
+                                        <span>Cookies Policy</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#your-rights" class="nav-link">
+                                        <i class="fas fa-user-shield"></i>
+                                        <span>Your Rights</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#contact" class="nav-link">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>Contact Us</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="col-lg-9">
+                    <!-- Introduction -->
+                    <div class="corporate-card active" id="introduction">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-info-circle me-3"
+                                    style="font-size: 1.5rem; color: var(--gold-primary);"></i>
+                                <h2 class="section-title mb-0">Introduction</h2>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="last-updated"><strong>Last Updated:</strong> December 27, 2024</p>
+                            <p>Welcome to Klem & Keys Realty Limited ("we," "our," or "us"). We are committed to
+                                protecting your privacy and ensuring the security of your personal information. This
+                                Privacy Policy explains how we collect, use, disclose, and safeguard your information
+                                when you visit our website or use our services.</p>
+                            <p>By accessing or using our services, you agree to the collection and use of information in
+                                accordance with this policy. If you do not agree with our policies and practices, please
+                                do not use our services.</p>
+                        </div>
+                    </div>
+
+                    <!-- Information We Collect -->
+                    <div class="corporate-card" id="information-collect">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-database me-3"
+                                    style="font-size: 1.5rem; color: var(--gold-primary);"></i>
+                                <h2 class="section-title mb-0">Information We Collect</h2>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3>Personal Information</h3>
+                            <p>We may collect the following types of personal information:</p>
+                            <ul>
+                                <li><strong>Contact Information:</strong> Name, email address, phone number, and mailing
+                                    address</li>
+                                <li><strong>Identification Information:</strong> Government-issued ID, passport details
+                                    (when required for property transactions)</li>
+                                <li><strong>Financial Information:</strong> Bank account details, payment information
+                                    (processed securely through third-party payment processors)</li>
+                                <li><strong>Property Preferences:</strong> Budget, location preferences, property type
+                                    interests</li>
+                                <li><strong>Communication Records:</strong> Correspondence with our team, inquiry
+                                    history, feedback</li>
+                            </ul>
+
+                            <h3>Automatically Collected Information</h3>
+                            <p>When you visit our website, we automatically collect:</p>
+                            <ul>
+                                <li>IP address and device information</li>
+                                <li>Browser type and version</li>
+                                <li>Pages visited and time spent on pages</li>
+                                <li>Referring website addresses</li>
+                                <li>Operating system information</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- How We Use Information -->
+                    <div class="corporate-card" id="how-we-use">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-cogs me-3" style="font-size: 1.5rem; color: var(--gold-primary);"></i>
+                                <h2 class="section-title mb-0">How We Use Your Information</h2>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p>We use the collected information for the following purposes:</p>
+                            <ul>
+                                <li><strong>Service Delivery:</strong> To provide property listings, schedule viewings,
+                                    process transactions, and deliver requested services</li>
+                                <li><strong>Communication:</strong> To respond to inquiries, send property updates, and
+                                    provide customer support</li>
+                                <li><strong>Personalization:</strong> To tailor property recommendations based on your
+                                    preferences and search history</li>
+                                <li><strong>Marketing:</strong> To send newsletters, promotional offers, and market
+                                    insights (with your consent)</li>
+                                <li><strong>Legal Compliance:</strong> To comply with Nigerian laws, regulations, and
+                                    legal obligations</li>
+                                <li><strong>Security:</strong> To protect against fraud, unauthorized access, and other
+                                    security threats</li>
+                                <li><strong>Analytics:</strong> To improve our website, services, and user experience
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Data Security -->
+                    <div class="corporate-card" id="data-security">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-lock me-3" style="font-size: 1.5rem; color: var(--gold-primary);"></i>
+                                <h2 class="section-title mb-0">Data Security</h2>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p>We implement appropriate technical and organizational security measures to protect your
+                                personal information against unauthorized access, alteration, disclosure, or
+                                destruction. These measures include:</p>
+                            <ul>
+                                <li>Encryption of sensitive data during transmission (SSL/TLS)</li>
+                                <li>Secure storage systems with access controls</li>
+                                <li>Regular security audits and updates</li>
+                                <li>Employee training on data protection practices</li>
+                                <li>Limited access to personal information on a need-to-know basis</li>
+                            </ul>
+                            <p>However, no method of transmission over the internet or electronic storage is 100%
+                                secure. While we strive to protect your personal information, we cannot guarantee
+                                absolute security.</p>
+                        </div>
+                    </div>
+
+                    <!-- Cookies Policy -->
+                    <div class="corporate-card" id="cookies">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-cookie-bite me-3"
+                                    style="font-size: 1.5rem; color: var(--gold-primary);"></i>
+                                <h2 class="section-title mb-0">Cookies and Tracking Technologies</h2>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p>We use cookies and similar tracking technologies to enhance your browsing experience.
+                                Cookies are small data files stored on your device.</p>
+
+                            <h3>Types of Cookies We Use:</h3>
+                            <ul>
+                                <li><strong>Essential Cookies:</strong> Necessary for website functionality</li>
+                                <li><strong>Analytics Cookies:</strong> Help us understand how visitors use our website
+                                </li>
+                                <li><strong>Preference Cookies:</strong> Remember your settings and preferences</li>
+                                <li><strong>Marketing Cookies:</strong> Track your browsing to show relevant
+                                    advertisements</li>
+                            </ul>
+
+                            <p>You can control cookies through your browser settings. However, disabling cookies may
+                                affect website functionality.</p>
+                        </div>
+                    </div>
+
+                    <!-- Your Rights -->
+                    <div class="corporate-card" id="your-rights">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-user-shield me-3"
+                                    style="font-size: 1.5rem; color: var(--gold-primary);"></i>
+                                <h2 class="section-title mb-0">Your Privacy Rights</h2>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p>Under Nigerian data protection laws, you have the following rights:</p>
+                            <ul>
+                                <li><strong>Access:</strong> Request access to your personal information we hold</li>
+                                <li><strong>Correction:</strong> Request correction of inaccurate or incomplete data
+                                </li>
+                                <li><strong>Deletion:</strong> Request deletion of your personal information (subject to
+                                    legal obligations)</li>
+                                <li><strong>Objection:</strong> Object to processing of your personal information for
+                                    marketing purposes</li>
+                                <li><strong>Data Portability:</strong> Request transfer of your data to another service
+                                    provider</li>
+                                <li><strong>Withdraw Consent:</strong> Withdraw consent for data processing at any time
+                                </li>
+                            </ul>
+
+                            <p>To exercise any of these rights, please contact us using the information provided below.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="corporate-card" id="contact">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-envelope me-3"
+                                    style="font-size: 1.5rem; color: var(--gold-primary);"></i>
+                                <h2 class="section-title mb-0">Contact Us</h2>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our
+                                data practices, please contact us:</p>
+
+                            <div class="contact-info-box">
+                                <p><strong>Klem & Keys Realty Limited</strong></p>
+                                <p><i class="fas fa-map-marker-alt me-2"></i>Block A2, Sunbuilt Estate, Kagini District,
+                                    Abuja, Nigeria</p>
+                                <p><i class="fas fa-phone me-2"></i><a href="tel:+2347072137505">+234 707 213 7505</a>
+                                </p>
+                                <p><i class="fas fa-envelope me-2"></i><a
+                                        href="mailto:contact@klemandkeysrealty.com">contact@klemandkeysrealty.com</a>
+                                </p>
+                            </div>
+
+                            <p class="mt-4"><strong>Changes to This Policy:</strong> We may update this Privacy Policy
+                                from time to time. We will notify you of any changes by posting the new Privacy Policy
+                                on this page and updating the "Last Updated" date.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Final CTA Section -->
+    <section class="final-cta-section" id="cta">
+        <div class="cta-overlay"></div>
+        <div class="cta-particles" id="ctaParticles"></div>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-xl-8">
+                    <div class="cta-content-wrapper">
+                        <div class="cta-icon-badge">
+                            <i class="fas fa-home"></i>
+                        </div>
+
+                        <h2 class="cta-title">
+                            Ready to Work with a Trusted Partner?
+                        </h2>
+
+                        <p class="cta-description">
+                            Your privacy matters to us. Join over 1,200 satisfied clients who trust us with their
+                            property journey, backed by our commitment to data protection and professional
+                            excellence.
+                        </p>
+
+                        <div class="cta-features">
+                            <div class="cta-feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Verified Properties</span>
+                            </div>
+                            <div class="cta-feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Legal Compliance</span>
+                            </div>
+                            <div class="cta-feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Expert Support</span>
+                            </div>
+                        </div>
+
+                        <div class="cta-buttons">
+                            <a href="contact.html" class="btn btn-cta-primary-modern">
+                                <i class="fas fa-phone-alt"></i>
+                                <span>Contact Us Now</span>
+                            </a>
+                            <a href="properties.html" class="btn btn-cta-secondary-modern">
+                                <i class="fas fa-search"></i>
+                                <span>Browse Properties</span>
+                            </a>
+                        </div>
+
+                        <div class="cta-trust-indicators">
+                            <div class="trust-item">
+                                <i class="fas fa-star"></i>
+                                <span>4.9/5 Rating</span>
+                            </div>
+                            <div class="trust-divider"></div>
+                            <div class="trust-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Certified & Licensed</span>
+                            </div>
+                            <div class="trust-divider"></div>
+                            <div class="trust-item">
+                                <i class="fas fa-award"></i>
+                                <span>12+ Years Experience</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Menu Overlay -->
+    <!-- No HTML needed - automatically created by navbar.js --><!-- ========================================
+       MODERN FOOTER V2 (Redesign)
+  ======================================== -->
+    <footer class="modern-footer-v2">
+        <div class="container">
+            <div class="row gy-5">
+
+                <!-- Brand & Socials -->
+                <div class="col-lg-4 col-md-12">
+                    <div class="ft-col">
+                        <a href="index.html" class="ft-logo">
+                            <img src="assets/img/logo-1.png" alt="Klem & Keys">
+                        </a>
+                        <p class="ft-desc">
+                            Your trusted partner for property acquisition, investment advisory, and real estate
+                            solutions across
+                            Nigeria.
+                        </p>
+                        <div class="ft-socials">
+                            <a href="https://www.facebook.com/profile.php?id=100054448062703&mibextid=ZbWKwL"
+                                class="ft-social-btn" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://x.com/klemandkeys?t=k_i8JaRTXvJGwYuoO2sXfw&s=09" class="ft-social-btn"
+                                target="_blank"><i class="fab fa-twitter"></i></a>
+                            <a href="http://instagram.com/klemandkeysrealtyltd?utm_source=qr" class="ft-social-btn"
+                                target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://tiktok.com/@klemandkeysrealtyltd" class="ft-social-btn" target="_blank"><i
+                                    class="fab fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="ft-col">
+                        <h4 class="ft-heading">Quick Links</h4>
+                        <ul class="ft-links">
+                            <li><a href="index.html" class="ft-link">Home</a></li>
+                            <li><a href="properties.html" class="ft-link">Properties</a></li>
+                            <li><a href="about.html" class="ft-link">About Us</a></li>
+                            <li><a href="services.html" class="ft-link">Our Services</a></li>
+                            <li><a href="contact.html" class="ft-link">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="ft-col">
+                        <h4 class="ft-heading">Contact Us</h4>
+                        <div class="ft-contact-list">
+                            <div class="ft-contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Block A2, Sunbuilt Estate,<br>Kagini District, Abuja</span>
+                            </div>
+                            <div class="ft-contact-item">
+                                <i class="fas fa-phone-alt"></i>
+                                <a href="tel:+2347072137505">+234 707 213 7505</a>
+                            </div>
+                            <div class="ft-contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:contact@klemandkeysrealty.com">contact@klemandkeysrealty.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="ft-bottom">
+                <p class="mb-0">© 2025 Klem & Keys Realty. All Rights Reserved.</p>
+                <div class="ft-legal">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms-conditions.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/corporate-info.js"></script>
+</body>
+
+</html>
