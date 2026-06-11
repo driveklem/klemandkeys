@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // Check rate limit first
       if (!rateLimiter.canSubmit()) {
         const remaining = rateLimiter.getRemainingTime();
-        alert(`Please wait ${remaining} minute${remaining > 1 ? 's' : ''} before submitting another message.`);
+        showPublicToast(`Please wait ${remaining} minute${remaining > 1 ? 's' : ''} before submitting another message.`, 'warning');
         return;
       }
 
@@ -183,7 +183,7 @@ ${originalMessage}`;
         submitBtnLoading.style.display = 'none';
 
         // Show error message
-        alert('Sorry, there was an error submitting your inquiry. Please try again or contact us directly.');
+        showPublicToast('Sorry, there was an error submitting your inquiry. Please try again or contact us directly.', 'error');
       }
     });
   }
@@ -252,3 +252,30 @@ ${originalMessage}`;
     });
   }
 });
+
+// Public page toast helper (no dependency on admin dashboard.js)
+function showPublicToast(message, type = 'info') {
+  const existing = document.querySelector('.public-toast');
+  if (existing) existing.remove();
+
+  const colors = { error: '#ef4444', warning: '#f59e0b', success: '#10b981', info: '#3b82f6' };
+  const toast = document.createElement('div');
+  toast.className = 'public-toast';
+  toast.style.cssText = `
+    position: fixed; top: 20px; right: 20px; z-index: 9999;
+    background: ${colors[type] || colors.info}; color: #fff;
+    padding: 14px 20px; border-radius: 10px; font-weight: 500;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2); max-width: 360px;
+    font-family: 'Inter', sans-serif; font-size: 0.9rem;
+    animation: slideInRight 0.3s ease;
+  `;
+  if (!document.getElementById('public-toast-style')) {
+    const style = document.createElement('style');
+    style.id = 'public-toast-style';
+    style.textContent = '@keyframes slideInRight { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }';
+    document.head.appendChild(style);
+  }
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  setTimeout(() => { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.3s'; setTimeout(() => toast.remove(), 300); }, 4000);
+}

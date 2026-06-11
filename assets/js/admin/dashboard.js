@@ -3,6 +3,83 @@
    Goal: Load Stats, Verify Auth, Manage Sidebar
 ========================================= */
 
+// --- Global UI Utilities ---
+window.showCustomAlert = function(message, type = 'danger') {
+    const existing = document.querySelector('.custom-alert-toast');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.className = `custom-alert-toast alert alert-${type} position-fixed d-flex align-items-center shadow-lg border-0`;
+    toast.style.top = '20px';
+    toast.style.right = '20px';
+    toast.style.zIndex = '9999';
+    toast.style.minWidth = '300px';
+    toast.style.background = 'var(--bg-surface-2)';
+    toast.style.color = 'var(--text-primary)';
+    if(type === 'danger') {
+        toast.style.borderLeft = '4px solid #ef4444';
+    } else if (type === 'success') {
+        toast.style.borderLeft = '4px solid #10b981';
+    } else {
+        toast.style.borderLeft = '4px solid var(--gold)';
+    }
+
+    toast.innerHTML = `
+        <div class="me-3">
+            ${type === 'danger' ? '<i class="fas fa-exclamation-circle text-danger fs-4"></i>' : 
+             (type === 'success' ? '<i class="fas fa-check-circle text-success fs-4"></i>' : 
+             '<i class="fas fa-info-circle text-info fs-4"></i>')}
+        </div>
+        <div class="flex-grow-1 fw-medium">${message}</div>
+        <button type="button" class="btn-close btn-close-white ms-2" onclick="this.parentElement.remove()"></button>
+    `;
+
+    document.body.appendChild(toast);
+    setTimeout(() => {
+        if (toast.parentElement) toast.remove();
+    }, 4000);
+};
+
+window.showCustomConfirm = function(title, message, onConfirm) {
+    const existing = document.querySelector('.custom-confirm-modal');
+    if (existing) existing.remove();
+
+    const modal = document.createElement('div');
+    modal.className = 'modal fade show custom-confirm-modal';
+    modal.style.display = 'block';
+    modal.style.backgroundColor = 'rgba(0,0,0,0.6)';
+    modal.style.zIndex = '9999';
+
+    modal.innerHTML = `
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg" style="background: var(--bg-surface); color: var(--text-primary);">
+                <div class="modal-header border-0 p-4" style="background: var(--bg-surface-2);">
+                    <h5 class="modal-title fw-bold" style="color: #ef4444;">${title}</h5>
+                    <button type="button" class="btn-close btn-close-white" onclick="this.closest('.modal').remove()"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="mb-0 fs-6" style="color: var(--text-secondary);">${message}</p>
+                </div>
+                <div class="modal-footer border-0 p-4" style="background: var(--bg-surface-2);">
+                    <button type="button" class="btn btn-secondary px-4" onclick="this.closest('.modal').remove()">Cancel</button>
+                    <button type="button" class="btn btn-danger px-4 fw-semibold" id="confirmActionBtn">Confirm</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    document.getElementById('confirmActionBtn').addEventListener('click', function() {
+        this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+        this.disabled = true;
+        onConfirm();
+        setTimeout(() => {
+            if(modal.parentElement) modal.remove();
+        }, 300);
+    });
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
 
     // --- 1. Authentication Check ---
@@ -40,15 +117,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         sidebarOverlay.addEventListener('click', toggleSidebar);
     }
 
-    // Logout Handler
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            if (confirm('Are you sure you want to sign out?')) {
-                localStorage.removeItem('klem_admin_token');
-                window.location.href = 'login.html';
-            }
-        });
-    }
+    // Logout Handler is managed by auth-guard.js
+
 
     // --- 4. Data Fetching (Real Supabase) ---
     async function loadDashboardData() {

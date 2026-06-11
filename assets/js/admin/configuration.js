@@ -111,11 +111,11 @@ function showAddLocationModal() {
 }
 
 function removeLocation(index) {
-    if (confirm('Remove this location?')) {
+    window.showCustomConfirm('Remove Location', 'Are you sure you want to remove this location?', () => {
         configData.locations.splice(index, 1);
         renderLocations();
         saveConfiguration();
-    }
+    });
 }
 
 // ============ PROPERTY TYPES ============
@@ -162,11 +162,11 @@ function showAddPropertyTypeModal() {
 }
 
 function removePropertyType(index) {
-    if (confirm('Remove this property type?')) {
+    window.showCustomConfirm('Remove Property Type', 'Are you sure you want to remove this property type?', () => {
         configData.property_types.splice(index, 1);
         renderPropertyTypes();
         saveConfiguration();
-    }
+    });
 }
 
 // ============ CONTACT INFO ============
@@ -289,21 +289,23 @@ function createModals() {
     const modalHTML = `
         <!-- Add Item Modal -->
         <div class="modal fade" id="addItemModal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add New Item</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg" style="background: var(--bg-surface); color: var(--text-primary);">
+                    <div class="modal-header border-0" style="background: var(--bg-surface-2);">
+                        <h5 class="modal-title fw-bold" style="color: var(--text-primary);">Add New Item</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body p-4">
                         <div class="mb-3">
-                            <label class="form-label">Name</label>
-                            <input type="text" class="form-control" id="itemInput" placeholder="Enter name">
+                            <label class="form-label fw-semibold" style="color: var(--text-primary);">Name</label>
+                            <input type="text" class="form-control" id="itemInput" placeholder="Enter name"
+                                style="background: var(--bg-surface-3); border-color: var(--border); color: var(--text-primary);">
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" id="saveItemBtn">Add</button>
+                    <div class="modal-footer border-0" style="background: var(--bg-surface-2);">
+                        <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn px-4 fw-semibold" id="saveItemBtn"
+                            style="background: var(--gold); color: #fff; border: none;">Add</button>
                     </div>
                 </div>
             </div>

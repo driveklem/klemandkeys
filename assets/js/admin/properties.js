@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const tableBody = document.getElementById('propertiesTableBody');
     const propertyGrid = document.getElementById('gridView');
     const tableView = document.getElementById('tableView');
-    const loadingState = `<tr><td colspan="9" class="text-center py-4"><div class="spinner-border text-primary" role="status"></div><div class="mt-2 text-muted">Loading properties...</div></td></tr>`;
+    const loadingState = ``;
 
     // Filters
     const searchInput = document.getElementById('searchInput');
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (error) {
             console.error('Error fetching properties:', error);
             if (tableBody) tableBody.innerHTML = `<tr><td colspan="9" class="text-center text-danger py-4">Error loading data: ${error.message}</td></tr>`;
-            alert('Failed to load properties');
+            window.showCustomAlert('Failed to load properties', 'danger');
         }
     }
 
@@ -107,21 +107,24 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </tr>`;
         } else {
             tableBody.innerHTML = properties.map(prop => `
+                <tr class="property-row">
                     <td><input type="checkbox" class="form-check-input row-checkbox" value="${prop.id}"></td>
-                    <td><small class="text-muted">${formatRefId(prop)}</small></td>
-                    <td>
-                        <div class="prop-name-cell">
-                            <img src="${getPropertyImage(prop)}" alt="Img" class="table-img">
-                            <strong>${prop.title}</strong>
-                        </div>
+                    <td onclick="openPropertyModal('${prop.id}')" style="cursor: pointer;"><small class="text-muted text-truncate d-inline-block" style="max-width: 80px;" title="${formatRefId(prop)}">${formatRefId(prop)}</small></td>
+                    <td onclick="openPropertyModal('${prop.id}')" style="cursor: pointer;">
+                        <img src="${getPropertyImage(prop)}" alt="Img" class="table-img" style="width:40px; height:40px; border-radius: 4px; object-fit: cover;">
                     </td>
-                    <td>${prop.location}</td>
-                    <td class="text-price">₦${formatPrice(prop.price)}</td>
-                    <td><span class="text-capitalize">${prop.type}</span></td>
-                    <td><span class="badge ${getStatusBadgeClass(prop.status)}">${prop.status}</span></td>
-                    <td>${new Date(prop.created_at).toLocaleDateString()}</td>
+                    <td onclick="openPropertyModal('${prop.id}')" style="cursor: pointer;">
+                        <strong class="text-truncate d-inline-block" style="max-width: 150px;" title="${prop.title}">${prop.title}</strong>
+                    </td>
+                    <td onclick="openPropertyModal('${prop.id}')" style="cursor: pointer;">
+                        <span class="text-truncate d-inline-block" style="max-width: 120px;" title="${prop.location}">${prop.location}</span>
+                    </td>
+                    <td class="text-price" onclick="openPropertyModal('${prop.id}')" style="cursor: pointer;">₦${formatPrice(prop.price)}</td>
+                    <td onclick="openPropertyModal('${prop.id}')" style="cursor: pointer;"><span class="text-capitalize">${prop.type}</span></td>
+                    <td onclick="openPropertyModal('${prop.id}')" style="cursor: pointer;"><span class="badge ${getStatusBadgeClass(prop.status)}">${prop.status}</span></td>
+                    <td onclick="openPropertyModal('${prop.id}')" style="cursor: pointer;">${new Date(prop.created_at).toLocaleDateString()}</td>
                     <td>
-                        <div class="action-buttons-cell">
+                        <div class="d-flex flex-nowrap align-items-center gap-2">
                             <a href="../property-detail.html?id=${prop.id}" target="_blank" class="btn-icon-view" title="View Public Page">
                                 <i class="fas fa-eye"></i>
                             </a>
@@ -390,17 +393,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         modal.innerHTML = `
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content border-0 shadow-lg">
-                    <div class="modal-header border-bottom-0">
-                        <h5 class="modal-title fw-bold text-danger">Delete Property?</h5>
-                        <button type="button" class="btn-close" onclick="this.closest('.modal').remove()"></button>
+                <div class="modal-content border-0 shadow-lg" style="background: var(--bg-surface); color: var(--text-primary);">
+                    <div class="modal-header border-0" style="background: var(--bg-surface-2);">
+                        <h5 class="modal-title fw-bold" style="color: #ef4444;">Delete Property?</h5>
+                        <button type="button" class="btn-close btn-close-white" onclick="this.closest('.modal').remove()"></button>
                     </div>
                     <div class="modal-body py-4">
-                        <p class="mb-0 text-muted">Are you sure you want to permanently delete this property? This action cannot be undone.</p>
+                        <p class="mb-0" style="color: var(--text-secondary);">Are you sure you want to permanently delete this property? This action cannot be undone.</p>
                     </div>
-                    <div class="modal-footer border-top-0">
-                        <button type="button" class="btn btn-secondary" onclick="this.closest('.modal').remove()">Cancel</button>
-                        <button type="button" class="btn btn-danger px-4" id="confirmPropDeleteBtn">Delete</button>
+                    <div class="modal-footer border-0" style="background: var(--bg-surface-2);">
+                        <button type="button" class="btn btn-secondary px-4" onclick="this.closest('.modal').remove()">Cancel</button>
+                        <button type="button" class="btn btn-danger px-4 fw-semibold" id="confirmPropDeleteBtn">Delete</button>
                     </div>
                 </div>
             </div>
@@ -446,7 +449,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             } catch (error) {
                 console.error('Delete error:', error);
-                alert('Failed to delete property: ' + error.message);
+                window.showCustomAlert('Failed to delete property: ' + error.message, 'danger');
                 modal.remove();
             }
         });
@@ -461,8 +464,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     function exportToCSV() {
-        if (allProperties.length === 0) {
-            alert('No properties to export.');
+        if (!allProperties || allProperties.length === 0) {
+            window.showCustomAlert('No properties to export.', 'info');
             return;
         }
 
@@ -504,6 +507,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         link.click();
         document.body.removeChild(link);
     }
+
+    // Modal Logic
+    window.openPropertyModal = function(id) {
+        const prop = allProperties.find(p => p.id == id);
+        if (!prop) return;
+
+        document.getElementById('modalPropertyTitle').textContent = prop.title;
+        document.getElementById('modalPropertyImage').src = getPropertyImage(prop);
+        document.getElementById('modalPropertyLocation').textContent = prop.location || 'N/A';
+        document.getElementById('modalPropertyPrice').textContent = '₦' + formatPrice(prop.price);
+        document.getElementById('modalPropertyStatus').innerHTML = `<span class="badge ${getStatusBadgeClass(prop.status)}">${prop.status}</span>`;
+        document.getElementById('modalPropertyType').textContent = prop.type || 'N/A';
+        document.getElementById('modalPropertyDate').textContent = new Date(prop.created_at).toLocaleDateString();
+        document.getElementById('modalPropertyDescription').textContent = prop.description || 'No description provided.';
+        
+        document.getElementById('modalEditBtn').href = 'property-add.html?id=' + prop.id;
+
+        const modal = new bootstrap.Modal(document.getElementById('propertyDetailsModal'));
+        modal.show();
+    };
 
     // Initialize
     fetchProperties();

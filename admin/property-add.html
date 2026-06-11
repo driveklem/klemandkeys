@@ -11,22 +11,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Premium Admin CSS -->
-    <link rel="stylesheet" href="../assets/css/admin/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/admin/dashboard.css?v=3.2">
     <style>
-        /* Enhanced Form Styles with Brand Colors */
-        :root {
-            --blue-dark: #0b2d4d;
-            --blue-mid: #1a4a7a;
-            --gold-primary: #b8923b;
-            --gold-hover: #d4b15c;
-        }
+        /* ============================================
+           ADD PROPERTY - DARK THEME OVERRIDES
+        ============================================ */
 
         .form-progress {
-            background: white;
+            background: var(--bg-surface-2);
             padding: 30px;
             border-radius: 16px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
         }
 
         .progress-steps {
@@ -45,8 +41,8 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: #e5e7eb;
-            color: #6b7280;
+            background: var(--bg-surface-3);
+            color: var(--text-muted);
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -54,133 +50,168 @@
             font-size: 1.2rem;
             margin-bottom: 10px;
             transition: all 0.3s;
+            border: 2px solid var(--border);
         }
 
         .step.active .step-number {
-            background: var(--blue-dark);
-            color: white;
+            background: var(--gold);
+            color: #fff;
+            border-color: var(--gold);
         }
 
         .step.completed .step-number {
-            background: var(--gold-primary);
+            background: var(--success);
             color: white;
+            border-color: var(--success);
         }
 
         .step-label {
             font-size: 0.9rem;
-            color: #6b7280;
+            color: var(--text-muted);
             font-weight: 500;
         }
 
         .step.active .step-label {
-            color: var(--blue-dark);
+            color: var(--gold-light);
             font-weight: 600;
+        }
+
+        .step.completed .step-label {
+            color: var(--text-secondary);
         }
 
         .progress-bar-custom {
             height: 6px;
-            background: #e5e7eb;
+            background: var(--bg-surface-3);
             border-radius: 10px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--blue-dark), var(--gold-primary));
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold));
             transition: width 0.4s ease;
             width: 25%;
         }
 
-        .form-step {
-            display: none;
-        }
-
+        .form-step { display: none; }
         .form-step.active {
             display: block;
             animation: fadeIn 0.3s;
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
+        /* --- Form Card / Section --- */
         .form-section {
-            background: white;
+            background: var(--bg-surface-2);
             padding: 40px;
             border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
         }
 
         .section-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: var(--blue-dark);
+            color: var(--text-primary);
             margin-bottom: 30px;
             padding-bottom: 15px;
-            border-bottom: 2px solid #f3f4f6;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-label {
+            color: var(--text-primary) !important;
+            font-weight: 500;
         }
 
         .form-label.required::after {
             content: '*';
-            color: #dc3545;
+            color: var(--danger);
             margin-left: 4px;
         }
 
+        /* --- Inputs & Selects --- */
         .form-control,
         .form-select {
-            border: 1.5px solid #e5e7eb;
+            background-color: var(--bg-surface-3) !important;
+            border: 1.5px solid var(--border) !important;
+            color: var(--text-primary) !important;
             border-radius: 8px;
             padding: 12px 16px;
             transition: all 0.2s;
         }
 
+        .form-control::placeholder { color: var(--text-muted) !important; }
         .form-control:focus,
         .form-select:focus {
-            border-color: var(--gold-primary);
-            box-shadow: 0 0 0 3px rgba(184, 146, 59, 0.1);
+            border-color: var(--gold) !important;
+            box-shadow: 0 0 0 3px rgba(184, 146, 59, 0.15) !important;
+            background-color: var(--bg-surface-3) !important;
+        }
+
+        /* Dropdown arrow for select on dark bg */
+        .form-select option {
+            background: var(--bg-surface-3);
+            color: var(--text-primary);
+        }
+
+        .form-check-label { color: var(--text-secondary) !important; }
+        .form-check-input { border-color: var(--border) !important; }
+        .form-check-input:checked { background-color: var(--gold) !important; border-color: var(--gold) !important; }
+
+        /* Input group text (₦ prefix) */
+        .input-group-text {
+            background: var(--bg-surface-3) !important;
+            border-color: var(--border) !important;
+            color: var(--gold) !important;
+            font-weight: 600;
+        }
+
+        /* Allow gap inside input-group */
+        .input-group.gap-2 {
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+
+        .input-group.gap-2 > * {
+            border-radius: 8px !important;
         }
 
         .form-help {
             font-size: 0.85rem;
-            color: #6b7280;
+            color: var(--text-muted);
             margin-top: 6px;
         }
 
-        /* Image Upload Areas */
+        /* --- Image Upload Areas --- */
         .image-upload-area {
-            border: 2px dashed #d1d5db;
+            border: 2px dashed var(--border);
             border-radius: 12px;
             padding: 40px;
             text-align: center;
-            background: #f9fafb;
+            background: var(--bg-surface-3);
             cursor: pointer;
             transition: all 0.3s;
+            color: var(--text-secondary);
         }
 
         .image-upload-area:hover {
-            border-color: var(--gold-primary);
-            background: rgba(184, 146, 59, 0.05);
+            border-color: var(--gold);
+            background: rgba(184, 146, 59, 0.06);
         }
 
         .upload-icon {
             font-size: 3rem;
-            color: #9ca3af;
+            color: var(--gold);
             margin-bottom: 15px;
         }
 
-        .file-input {
-            display: none;
-        }
+        .file-input { display: none; }
 
-        /* Amenities Grid */
+        /* --- Amenities --- */
         .amenities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -188,37 +219,31 @@
             margin-top: 15px;
         }
 
-        .amenity-checkbox {
-            position: relative;
-        }
-
-        .amenity-input {
-            display: none;
-        }
+        .amenity-checkbox { position: relative; }
+        .amenity-input { display: none; }
 
         .amenity-label {
             display: flex;
             align-items: center;
             gap: 10px;
             padding: 12px 16px;
-            border: 1.5px solid #e5e7eb;
+            border: 1.5px solid var(--border);
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
-            background: white;
+            background: var(--bg-surface-3);
+            color: var(--text-secondary);
         }
 
-        .amenity-input:checked+.amenity-label {
-            border-color: var(--gold-primary);
-            background: rgba(184, 146, 59, 0.05);
-            color: var(--blue-dark);
+        .amenity-input:checked + .amenity-label {
+            border-color: var(--gold);
+            background: rgba(184, 146, 59, 0.1);
+            color: var(--gold-light);
         }
 
-        .amenity-label i {
-            color: var(--gold-primary);
-        }
+        .amenity-label i { color: var(--gold); }
 
-        /* Navigation Buttons */
+        /* --- Navigation Buttons --- */
         .form-navigation {
             display: flex;
             justify-content: space-between;
@@ -226,9 +251,7 @@
             gap: 15px;
         }
 
-        .btn-next-step,
-        .btn-prev-step,
-        .btn-submit-property {
+        .btn-next-step, .btn-prev-step, .btn-submit-property {
             padding: 14px 32px;
             border-radius: 8px;
             font-weight: 600;
@@ -237,39 +260,42 @@
             transition: all 0.2s;
         }
 
-        .btn-next-step,
-        .btn-submit-property {
-            background: var(--blue-dark);
-            color: white;
+        .btn-next-step, .btn-submit-property {
+            background: var(--gold);
+            color: #fff;
         }
 
-        .btn-next-step:hover,
-        .btn-submit-property:hover {
-            background: var(--blue-mid);
+        .btn-next-step:hover, .btn-submit-property:hover {
+            background: var(--gold-light);
             transform: translateY(-2px);
         }
 
         .btn-prev-step {
-            background: #f3f4f6;
-            color: #374151;
+            background: var(--bg-surface-3);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
         }
 
         .btn-prev-step:hover {
-            background: #e5e7eb;
+            background: var(--bg-hover);
+            color: var(--text-primary);
         }
 
         .btn-save-draft {
-            background: white;
-            border: 1.5px solid var(--gold-primary);
-            color: var(--gold-primary);
+            background: transparent;
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
             padding: 14px 32px;
             border-radius: 8px;
             font-weight: 600;
         }
 
         .btn-save-draft:hover {
-            background: rgba(184, 146, 59, 0.05);
+            background: rgba(184, 146, 59, 0.1);
         }
+
+        /* Fix text-muted in dark context */
+        .text-muted { color: var(--text-muted) !important; }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17887589364"></script>
@@ -280,7 +306,7 @@
 
         gtag('config', 'AW-17887589364');
     </script>
-</head>
+<style>.table, .table *, .table-responsive, .card-table { background-color: transparent !important; color: #f0f4f8 !important; border-color: rgba(255,255,255,0.07) !important; } .card-table, .panel { background-color: #161b25 !important; }</style></head>
 
 <body>
 
@@ -631,11 +657,12 @@
 
                             <div class="row g-4">
                                 <div class="col-md-6">
-                                    <label for="propertyPrice" class="form-label required">Price (₦)</label>
-                                    <div class="input-group">
+                                    <label for="propertyPriceDisplay" class="form-label required">Price (₦)</label>
+                                    <div class="input-group gap-2">
                                         <span class="input-group-text">₦</span>
-                                        <input type="number" class="form-control" id="propertyPrice"
-                                            placeholder="285000000" style="min-width: 200px;" required>
+                                        <input type="text" class="form-control price-formatted" id="propertyPriceDisplay"
+                                            placeholder="285,000,000" style="min-width: 200px;" required autocomplete="off">
+                                        <input type="hidden" id="propertyPrice" name="propertyPrice">
                                         <select class="form-select" id="priceUnit" style="max-width: 150px;">
                                             <option value="fixed">Fixed</option>
                                             <option value="negotiable">Negotiable</option>
@@ -719,7 +746,6 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/admin/dashboard.js"></script>
     <script>
         // Multi-step form logic
         let currentStep = 1;
@@ -830,15 +856,14 @@
 
             if (step === 4) { // While there is no "Next" button on step 4, this might be useful for submit
                 // Validate Pricing & Location
-                const price = document.getElementById('propertyPrice');
-                const city = document.getElementById('propertyCity');
-                const state = document.getElementById('propertyState');
+                const price = document.getElementById('propertyPrice'); // hidden field with raw value
+                const priceDisplay = document.getElementById('propertyPriceDisplay');
 
                 if (!price.value || parseFloat(price.value) <= 0) {
-                    price.classList.add('is-invalid');
+                    if (priceDisplay) priceDisplay.classList.add('is-invalid');
                     isValid = false;
                 } else {
-                    price.classList.remove('is-invalid');
+                    if (priceDisplay) priceDisplay.classList.remove('is-invalid');
                 }
 
                 if (!city.value.trim()) {
@@ -897,8 +922,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../assets/js/supabase.js"></script>
-    <script src="../assets/js/admin/auth-guard.js"></script>
     <script src="../assets/js/admin/dashboard.js"></script>
+    <script src="../assets/js/admin/auth-guard.js"></script>
     <script src="../assets/js/admin/property-add.js"></script>
 
     <!-- ROBUST SIDEBAR TOGGLE FIX -->
@@ -927,4 +952,48 @@
             }
         });
     </script>
+</body>
+<script>
+    // =============================================
+    // COMMA SEPARATOR FOR ALL AMOUNT INPUTS
+    // =============================================
+    function formatWithCommas(value) {
+        const raw = value.replace(/[^0-9]/g, '');
+        return raw ? Number(raw).toLocaleString('en-NG') : '';
+    }
+
+    function attachCommaFormatter(displayId, hiddenId) {
+        const display = document.getElementById(displayId);
+        const hidden = document.getElementById(hiddenId);
+        if (!display) return;
+
+        display.addEventListener('input', function () {
+            const raw = this.value.replace(/[^0-9]/g, '');
+            this.value = raw ? Number(raw).toLocaleString('en-NG') : '';
+            if (hidden) hidden.value = raw;
+        });
+
+        display.addEventListener('blur', function () {
+            const raw = this.value.replace(/[^0-9]/g, '');
+            this.value = raw ? Number(raw).toLocaleString('en-NG') : '';
+            if (hidden) hidden.value = raw;
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Price field
+        attachCommaFormatter('propertyPriceDisplay', 'propertyPrice');
+
+        // Area size (if numeric)
+        const areaSize = document.getElementById('areaSize');
+        if (areaSize) {
+            areaSize.setAttribute('type', 'text');
+            areaSize.placeholder = '450';
+            areaSize.addEventListener('input', function () {
+                const raw = this.value.replace(/[^0-9]/g, '');
+                this.value = raw ? Number(raw).toLocaleString('en-NG') : '';
+            });
+        }
+    });
+</script>
 </body>

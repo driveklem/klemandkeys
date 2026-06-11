@@ -190,16 +190,16 @@ function confirmDelete(inquiryId) {
 
     modal.innerHTML = `
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg">
-                <div class="modal-header border-bottom-0">
-                    <h5 class="modal-title fw-bold text-danger">Delete Inquiry?</h5>
-                    <button type="button" class="btn-close" onclick="this.closest('.modal').remove()"></button>
+            <div class="modal-content border-0 shadow-lg" style="background: var(--bg-surface); color: var(--text-primary);">
+                <div class="modal-header border-0" style="background: var(--bg-surface-2);">
+                    <h5 class="modal-title fw-bold" style="color: #ef4444;">Delete Inquiry?</h5>
+                    <button type="button" class="btn-close btn-close-white" onclick="this.closest('.modal').remove()"></button>
                 </div>
                 <div class="modal-body py-4">
-                    <p class="mb-0 text-muted">Are you sure you want to permanently delete this inquiry? This action cannot be undone.</p>
+                    <p class="mb-0" style="color: var(--text-secondary);">Are you sure you want to permanently delete this inquiry? This action cannot be undone.</p>
                 </div>
-                <div class="modal-footer border-top-0">
-                    <button type="button" class="btn btn-secondary" onclick="this.closest('.modal').remove()">Cancel</button>
+                <div class="modal-footer border-0" style="background: var(--bg-surface-2);">
+                    <button type="button" class="btn btn-secondary px-4" onclick="this.closest('.modal').remove()">Cancel</button>
                     <button type="button" class="btn btn-danger px-4" id="confirmDeleteBtn">Delete</button>
                 </div>
             </div>
@@ -297,57 +297,57 @@ function viewInquiry(inquiryId) {
     modal.style.zIndex = '1055'; // Ensure on top
 
     modal.innerHTML = `
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg">
-                <div class="modal-header bg-light border-bottom-0 p-4">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content border-0 shadow-lg" style="background: var(--bg-surface); color: var(--text-primary); max-height: 80vh;">
+                <div class="modal-header border-0 p-4" style="background: var(--bg-surface-2);">
                     <div>
-                        <h5 class="modal-title fw-bold text-dark mb-1">Inquiry Details</h5>
-                        <div class="text-muted small">ID: #${inquiry.id} • ${new Date(inquiry.created_at).toLocaleString()}</div>
+                        <h5 class="modal-title fw-bold mb-1" style="color: var(--text-primary);">Inquiry Details</h5>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">ID: #${inquiry.id} &bull; ${new Date(inquiry.created_at).toLocaleString()}</div>
                     </div>
-                    <button type="button" class="btn-close" onclick="this.closest('.modal').remove()"></button>
+                    <button type="button" class="btn-close btn-close-white" onclick="this.closest('.modal').remove()"></button>
                 </div>
                 
                 <div class="modal-body p-4">
                     <!-- Contact Info Section -->
                     <div class="row g-4 mb-4">
                         <div class="col-md-6">
-                            <label class="text-uppercase text-muted small fw-bold mb-2">Client Name</label>
-                            <div class="fw-medium text-dark">${inquiry.name}</div>
+                            <label class="text-uppercase small fw-bold mb-2" style="color: var(--text-primary);">Client Name</label>
+                            <div class="fw-medium" style="color: var(--text-primary);">${inquiry.name}</div>
                         </div>
                         <div class="col-md-6">
-                            <label class="text-uppercase text-muted small fw-bold mb-2">Phone</label>
-                            <div><a href="tel:${inquiry.phone}" class="text-dark text-decoration-none">${inquiry.phone || 'N/A'}</a></div>
+                            <label class="text-uppercase small fw-bold mb-2" style="color: var(--text-primary);">Phone</label>
+                            <div><a href="tel:${inquiry.phone}" style="color: var(--text-secondary); text-decoration: none;">${inquiry.phone || 'N/A'}</a></div>
                         </div>
                         <div class="col-12">
-                            <label class="text-uppercase text-muted small fw-bold mb-2">Email</label>
-                            <div><a href="mailto:${inquiry.email}" class="text-decoration-none" style="color: #b8923b; font-weight: 500;">${inquiry.email}</a></div>
+                            <label class="text-uppercase small fw-bold mb-2" style="color: var(--text-primary);">Email</label>
+                            <div><a href="mailto:${inquiry.email}" style="color: var(--gold); font-weight: 500; text-decoration: none;">${inquiry.email}</a></div>
                         </div>
                     </div>
 
-                    <hr class="text-muted opacity-25 my-4">
+                    <hr style="border-color: var(--border); opacity: 1;" class="my-3">
 
                     <!-- Property Info -->
                     <div class="row g-4 mb-4">
                         <div class="col-md-8">
-                            <label class="text-uppercase text-muted small fw-bold mb-2">Property Interest</label>
-                            <div class="fw-bold text-dark fs-5">${propertyTitle}</div>
-                            <div class="text-muted small"><i class="fas fa-map-marker-alt me-1"></i> ${propertyLocation}</div>
+                            <label class="text-uppercase small fw-bold mb-2" style="color: var(--text-primary);">Property Interest</label>
+                            <div class="fw-bold fs-6" style="color: var(--text-primary);">${propertyTitle}</div>
+                            <div class="small" style="color: var(--text-muted);"><i class="fas fa-map-marker-alt me-1"></i> ${propertyLocation}</div>
                             ${inquiry.property_id ? `<a href="../property-detail.html?id=${inquiry.property_id}" target="_blank" class="btn btn-sm btn-gold mt-2">Open Property Page <i class="fas fa-external-link-alt ms-1"></i></a>` : ''}
                         </div>
                         <div class="col-md-4">
-                            <label class="text-uppercase text-muted small fw-bold mb-2">Current Status</label>
+                            <label class="text-uppercase small fw-bold mb-2" style="color: var(--text-primary);">Current Status</label>
                             <div><span class="badge ${getStatusClass(inquiry.status)} px-3 py-2">${inquiry.status || 'new'}</span></div>
                         </div>
                     </div>
 
                     <!-- Message Body -->
-                    <div class="bg-light p-4 rounded-3 border">
-                        <label class="text-uppercase text-muted small fw-bold mb-3 d-block">Message Content</label>
-                        <div class="text-dark" style="white-space: pre-wrap; font-size: 0.95rem; line-height: 1.6;">${inquiry.message || 'No message provided.'}</div>
+                    <div class="p-4 rounded-3" style="background: var(--bg-surface-2); border: 1px solid var(--border);">
+                        <label class="text-uppercase small fw-bold mb-3 d-block" style="color: var(--text-primary);">Message Content</label>
+                        <div style="color: var(--text-secondary); white-space: pre-wrap; font-size: 0.95rem; line-height: 1.6;">${inquiry.message || 'No message provided.'}</div>
                     </div>
                 </div>
 
-                <div class="modal-footer border-top-0 p-4 bg-light rounded-bottom">
+                <div class="modal-footer border-0 p-4" style="background: var(--bg-surface-2);">
                     <button type="button" class="btn btn-secondary px-4" onclick="this.closest('.modal').remove()">Close</button>
                     ${inquiry.status === 'new' ? `<button type="button" class="btn btn-info px-4 text-white" onclick="updateInquiryStatus(${inquiry.id}, 'read'); this.closest('.modal').remove()">Mark as Read</button>` : ''}
                 </div>

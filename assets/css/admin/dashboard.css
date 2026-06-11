@@ -1,5 +1,5 @@
-/* =========================================================
-   KLEM & KEYS ADMIN — PREMIUM DARK MODE DESIGN SYSTEM v3.0
+﻿/* =========================================================
+   KLEM & KEYS ADMIN â€” PREMIUM DARK MODE DESIGN SYSTEM v3.0
    Style: Dark Mode / Professional Real Estate SaaS
    Font: Inter (body) | Cinzel (brand headings)
 ========================================================= */
@@ -1391,7 +1391,7 @@ body {
 .text-price   { color: var(--gold-light); font-weight: 700; font-size: 0.95rem; }
 
 /* =============================================
-   RESPONSIVE — TABLET (max 992px)
+   RESPONSIVE â€” TABLET (max 992px)
 ============================================= */
 @media (max-width: 992px) {
     .actions-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1409,7 +1409,7 @@ body {
 }
 
 /* =============================================
-   RESPONSIVE — MOBILE (max 768px)
+   RESPONSIVE â€” MOBILE (max 768px)
 ============================================= */
 @media (max-width: 768px) {
     .sidebar {
@@ -1453,7 +1453,7 @@ body {
 }
 
 /* =============================================
-   RESPONSIVE — SMALL MOBILE (max 480px)
+   RESPONSIVE â€” SMALL MOBILE (max 480px)
 ============================================= */
 @media (max-width: 480px) {
     .content-area { padding: 12px; }
@@ -1462,4 +1462,41 @@ body {
     .actions-grid { grid-template-columns: repeat(2, 1fr); }
     .panel-header, .card-header { padding: 14px 16px; }
     .panel-body, .config-body { padding: 14px 16px; }
+}
+/* =============================================
+   PROPERTY TABLE SPECIFICS
+============================================= */
+.prop-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.table-img {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    border: 1px solid var(--border);
+}
+
+/* =============================================
+   FORCE DARK MODE OVERRIDES
+============================================= */
+.card-table, .panel, .config-card, .stat-card {
+    background-color: var(--bg-surface) !important;
+}
+
+.table, .table td, .table th, .table tr {
+    background-color: transparent !important;
+    color: var(--text-primary) !important;
+}
+
+.table tbody tr td {
+    background-color: transparent !important;
+    color: var(--text-primary) !important;
+}
+
+.table-responsive {
+    background-color: transparent !important;
 }

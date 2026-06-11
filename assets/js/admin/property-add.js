@@ -166,9 +166,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (error) throw error;
             originalPropertyData = data; // Store for later use
             populateForm(data);
-        } catch (error) {
-            console.error('Error fetching details:', error);
-            alert('Failed to load property details.');
+        } catch (err) {
+            console.error('Error loading property for edit:', err);
+            window.showCustomAlert('Failed to load property details.', 'danger');
+            window.location.href = 'properties.html';
         }
     }
 
@@ -432,8 +433,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 .upload(filePath, file);
 
             if (error) {
-                console.error('Upload error:', error);
-                alert(`Image upload failed: ${error.message}. Please ensure the 'properties' storage bucket exists in Supabase.`);
+                console.error('Upload Error Details:', error);
+                window.showCustomAlert(`Image upload failed: ${error.message}. Please ensure the 'properties' storage bucket exists in Supabase.`, 'danger');
                 return null;
             }
 
